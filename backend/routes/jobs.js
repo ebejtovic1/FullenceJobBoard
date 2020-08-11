@@ -38,12 +38,22 @@ router.post("", multer({storage: storage}).single("image"),(req, res, next) =>{
   post.save()
   .then(result =>{
     res.status(201).json({
-      message:"Post added succesfully!",
+      message:"Job added succesfully!",
       post:{
         ...result,
         id: result._id
       }
   });
+  });
+});
+
+router.get('',(req, res, next)=>{
+  Job.find()
+  .then(documents =>{
+    res.status(200).json({
+      message:"Jobs fetched succesfully!",
+      jobs:documents
+    });
   });
 });
 
