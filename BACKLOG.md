@@ -85,6 +85,16 @@ Implement dropdown to show data from DB
 * Create pull request 
 
 # Feature
+About
+## Item
+Add About Us to page.
+### Task
+* Design page layout for About Us
+* Add route from main page
+* Push code
+* Create pull request
+
+# Feature
 Employer Login
 ## Item
 Employer must be able to log in for performing advert CRUD operatrions.
