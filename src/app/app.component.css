@@ -10,3 +10,7 @@ button {
   margin-right: 20px;
   margin-left: 20px;
 }
+main {
+  width: 80%;
+  margin: 1rem auto;
+}
