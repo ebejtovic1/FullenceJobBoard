@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const postSchema = mongoose.Schema({
+const jobSchema = mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -26,4 +26,4 @@ const postSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Job', postSchema);
+module.exports = mongoose.model('Job', jobSchema);
