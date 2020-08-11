@@ -1,0 +1,12 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.groupName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+button {
+  margin-right: 20px;
+  margin-left: 20px;
+}
