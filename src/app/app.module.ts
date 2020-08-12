@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CardComponent } from './card/card.component';
     JobCreateComponent,
     CardComponent,
     JobsViewComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import { CardComponent } from './card/card.component';
     MatToolbarModule,
     MatProgressSpinnerModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
