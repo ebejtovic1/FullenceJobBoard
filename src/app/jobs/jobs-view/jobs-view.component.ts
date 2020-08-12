@@ -12,6 +12,8 @@ export class JobsViewComponent implements OnInit {
   jobs: Job[] = [];
   private postsSub: Subscription;
 
+  filterLocation='';
+  filterJobType='';
   constructor(private jobsService: JobsService) {}
 
   ngOnInit(): void {
