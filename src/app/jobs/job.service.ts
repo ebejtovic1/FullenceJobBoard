@@ -75,7 +75,7 @@ export class JobsService {
           location: location,
           jobType: jobType,
           firm: firm,
-          descSubstring:descSubstring
+          descSubstring:""
         };
         this.jobs.push(post);
         this.jobsUpdated.next([...this.jobs]);
@@ -112,12 +112,12 @@ export class JobsService {
         location: location,
         jobType: jobType,
         firm: firm,
-        descSubstring: description.substr(100)
+        descSubstring: ""
       };
     }
 
     this.http
-      .put('http://localhost:3000/api/posts/' + id, jobData)
+      .put('http://localhost:3000/api/jobs/' + id, jobData)
       .subscribe((response) => {
         const updatedJobs = [...this.jobs];
         const oldJobIndex = updatedJobs.findIndex((p) => p.id === id);
@@ -129,7 +129,7 @@ export class JobsService {
           location: location,
           jobType: jobType,
           firm: firm,
-          descSubstring: description.substr(1,100)
+          descSubstring: ""
         };
 
         updatedJobs[oldJobIndex] = post;

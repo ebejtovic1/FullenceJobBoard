@@ -22,15 +22,13 @@ const jobSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-
   firm: {
     type: String,
     required: true,
   },
-
   descSubstring: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 
