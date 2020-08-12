@@ -14,6 +14,9 @@ const routes: Routes = [
     path: 'create',
     component: JobCreateComponent,
   },
+  {
+    path: 'edit/:postId', component: JobCreateComponent
+  }
 ];
 
 @NgModule({

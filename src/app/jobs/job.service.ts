@@ -49,7 +49,9 @@ export class JobsService {
     image: File,
     location: string,
     jobType: string,
-    firm: string
+    firm: string,
+    descSubstring: string
+
   ) {
     const jobData = new FormData();
     jobData.append('title', title);
@@ -73,6 +75,7 @@ export class JobsService {
           location: location,
           jobType: jobType,
           firm: firm,
+          descSubstring:descSubstring
         };
         this.jobs.push(post);
         this.jobsUpdated.next([...this.jobs]);
@@ -87,7 +90,7 @@ export class JobsService {
     image: File | string,
     location: string,
     jobType: string,
-    firm: string
+    firm: string,
   ) {
     let jobData: Job | FormData;
     if (typeof image === 'object') {
@@ -99,6 +102,7 @@ export class JobsService {
       jobData.append('location', location);
       jobData.append('jobType', jobType);
       jobData.append('firm', firm);
+
     } else {
       jobData = {
         id: id,
@@ -108,6 +112,7 @@ export class JobsService {
         location: location,
         jobType: jobType,
         firm: firm,
+        descSubstring: description.substr(100)
       };
     }
 
@@ -124,6 +129,7 @@ export class JobsService {
           location: location,
           jobType: jobType,
           firm: firm,
+          descSubstring: description.substr(1,100)
         };
 
         updatedJobs[oldJobIndex] = post;
@@ -135,5 +141,9 @@ export class JobsService {
 
   getPostUpdateListener() {
     return this.jobsUpdated.asObservable();
+  }
+
+  getJob(id: string){
+    return this.http.get<{_id: string, title: string, description: string, imagePath: string, location: string, jobType: string, firm: string,descSubstring:string }>("http://localhost:3000/api/jobs/" + id);
   }
 }

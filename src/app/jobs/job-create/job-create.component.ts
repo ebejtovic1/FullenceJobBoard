@@ -41,7 +41,14 @@ export class JobCreateComponent implements OnInit {
       });
     this.route.paramMap.subscribe((paramMap: ParamMap)=>{
       if(paramMap.has('jobId')){
-        //ide Edit
+        this.mode='edit';
+        this.jobId=paramMap.get('postId');
+        this.isLoading=true;
+        this.jobsService.getJob(this.jobId).subscribe(postData=>{
+          this.isLoading=false;
+          this.job={id:postData._id, title: postData.title, description: postData.description, imagePath: postData.imagePath, location:postData.location, jobType: postData.jobType, firm: postData.firm, descSubstring: postData.descSubstring};
+          this.form.setValue({title: this.job.title, description: this.job.description, image: this.job.imagePath});
+        });
       }
       else{
         this.mode='create';
@@ -62,11 +69,11 @@ export class JobCreateComponent implements OnInit {
 
      this.isLoading=true;
      if(this.mode==='create'){
-       this.jobsService.addJob(this.form.value.title, this.form.value.description, this.form.value.image, this.form.value.location, this.form.value.jobType, this.form.value.firm)
+       this.jobsService.addJob(this.form.value.title, this.form.value.description, this.form.value.image, this.form.value.location, this.form.value.jobType, this.form.value.firm, "")
 
      }
      else{
-       //ovjde ide za update
+      this.jobsService.updateJob(this.jobId, this.form.value.title, this.form.value.description, this.form.value.image, this.form.value.location, this.form.value.jobType, this.form.value.firm, "");
      }
      this.form.reset();
   }
