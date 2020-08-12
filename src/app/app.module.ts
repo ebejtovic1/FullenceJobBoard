@@ -17,7 +17,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { SignupComponent } from "./auth/signup/signup.component";
 import { AuthInterceptor } from "./auth/auth-interceptor";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FilterPipe} from './jobs/jobs-view/filter.pipe'
+import {FilterPipe} from './jobs/jobs-view/filter.pipe';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import {FilterPipe} from './jobs/jobs-view/filter.pipe'
     JobsViewComponent,
     LoginComponent,
     SignupComponent,
-    FilterPipe
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,7 @@ import {FilterPipe} from './jobs/jobs-view/filter.pipe'
     MatProgressSpinnerModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],

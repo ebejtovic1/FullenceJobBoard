@@ -7,4 +7,5 @@ export interface Job {
   jobType: string;
   firm: string;
   descSubstring: string;
+  creator: string;
 } //definira kako objekat izgleda ali se ne moze instancirati, ovo radimo kako bi znali sta unosimo u nas Post, kakav tip podataka

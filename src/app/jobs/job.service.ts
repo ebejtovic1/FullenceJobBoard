@@ -33,6 +33,7 @@ export class JobsService {
               location: post.location,
               jobType: post.jobType,
               firm: post.firm,
+              creator: post.creator
             };
           });
         })
@@ -75,7 +76,8 @@ export class JobsService {
           location: location,
           jobType: jobType,
           firm: firm,
-          descSubstring:""
+          descSubstring:"",
+          creator: responseData.post.creator
         };
         this.jobs.push(post);
         this.jobsUpdated.next([...this.jobs]);
@@ -90,7 +92,6 @@ export class JobsService {
       this.jobsUpdated.next([...this.jobs]);
     });
   }
-
 
   updateJob(
     id: string,
@@ -111,7 +112,6 @@ export class JobsService {
       jobData.append('location', location);
       jobData.append('jobType', jobType);
       jobData.append('firm', firm);
-
     } else {
       jobData = {
         id: id,
@@ -121,7 +121,8 @@ export class JobsService {
         location: location,
         jobType: jobType,
         firm: firm,
-        descSubstring: ""
+        descSubstring: "",
+        creator: null
       };
     }
 
@@ -138,7 +139,8 @@ export class JobsService {
           location: location,
           jobType: jobType,
           firm: firm,
-          descSubstring: ""
+          descSubstring: "",
+          creator: null
         };
 
         updatedJobs[oldJobIndex] = post;
@@ -153,6 +155,6 @@ export class JobsService {
   }
 
   getJob(id: string){
-    return this.http.get<{_id: string, title: string, description: string, imagePath: string, location: string, jobType: string, firm: string,descSubstring:string }>("http://localhost:3000/api/jobs/" + id);
+    return this.http.get<{_id: string, title: string, description: string, imagePath: string, location: string, jobType: string, firm: string,descSubstring:string, creator:string }>("http://localhost:3000/api/jobs/" + id);
   }
 }

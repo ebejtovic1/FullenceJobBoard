@@ -20,6 +20,7 @@ export class JobsViewComponent implements OnInit, OnDestroy {
   userId: string;
   private postsSub: Subscription;
   private authStatusSub: Subscription;
+  myJobs: boolean;
 
   constructor(private jobsService: JobsService, private authService: AuthService) { }
 
@@ -29,6 +30,7 @@ export class JobsViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.jobsService.getJobs();
     this.userId = this.authService.getUserId();
+    this.myJobs = false;
     this.postsSub = this.jobsService
       .getPostUpdateListener()
       .subscribe((jobs: Job[]) => {
@@ -50,6 +52,10 @@ export class JobsViewComponent implements OnInit, OnDestroy {
   }
   onDelete(jobId: string) {
     this.jobsService.deleteJob(jobId);
+  }
+
+  onMyJobs() {
+    this.myJobs = !this.myJobs;
   }
 
   ngOnDestroy() {
