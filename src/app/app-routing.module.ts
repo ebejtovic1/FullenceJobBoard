@@ -3,6 +3,7 @@ import { JobsViewComponent } from 'src/app/jobs/jobs-view/jobs-view.component';
 import { Routes, RouterModule } from '@angular/router';
 import { JobCreateComponent } from './jobs/job-create/job-create.component';
 import { CardComponent } from './card/card.component';
+import { ShowMoreComponent } from 'src/app/jobs/show-more/show-more.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: JobCreateComponent,
+  },
+  {
+    path: 'showMore',
+    component: ShowMoreComponent,
   },
 ];
 

@@ -1,4 +1,4 @@
-<mat-card class="matCard">
+<mat-card style="margin-top: 70px;" class="matCard">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <!--Sljedeca linija daje nam pristup objektu-->
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">

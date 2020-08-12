@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
+import { ShowMoreComponent } from './jobs/show-more/show-more.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CardComponent } from './card/card.component';
     JobCreateComponent,
     CardComponent,
     JobsViewComponent,
+    ShowMoreComponent,
   ],
   imports: [
     BrowserModule,
