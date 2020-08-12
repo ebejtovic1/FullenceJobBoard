@@ -27,8 +27,7 @@ const jobSchema = mongoose.Schema({
     required: true,
   },
   descSubstring: {
-    type: String,
-    required: true,
+    type: String
   },
 });
 

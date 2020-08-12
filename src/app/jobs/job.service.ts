@@ -30,7 +30,7 @@ export class JobsService {
               id: post._id,
               description: post.description,
               imagePath: post.imagePath,
-              location: location,
+              location: post.location,
               jobType: post.jobType,
               firm: post.firm,
             };
