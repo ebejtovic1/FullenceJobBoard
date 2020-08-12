@@ -1,0 +1,23 @@
+<!--Ako imamo ijedan post-->
+<div class="container">
+  <div class="row justify-content-start">
+    <div *ngFor="let job of jobs" class="col-md-3">
+      <div class="job-image">
+        <img height="250" [src]="job.imagePath" />
+      </div>
+      <div>
+        <label class="textLabel">{{ job.title }}</label
+        ><br />
+        <label class="textLabel">{{ job.firm }}</label>
+      </div>
+      <div>
+        <label class="textLabel">
+          {{ job.descSubstring }}
+        </label>
+      </div>
+      <div class="buttonDiv">
+        <button class="btn btn-info">Show More</button>
+      </div>
+    </div>
+  </div>
+</div>
