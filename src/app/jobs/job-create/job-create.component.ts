@@ -62,7 +62,7 @@ export class JobCreateComponent implements OnInit {
 
      this.isLoading=true;
      if(this.mode==='create'){
-       this.jobsService.addPost(this.form.value.title, this.form.value.description, this.form.value.image, this.form.value.location, this.form.value.jobType, this.form.value.firm)
+       this.jobsService.addJob(this.form.value.title, this.form.value.description, this.form.value.image, this.form.value.location, this.form.value.jobType, this.form.value.firm)
 
      }
      else{
