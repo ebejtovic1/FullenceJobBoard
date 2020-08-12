@@ -1,11 +1,17 @@
 <!--Ako imamo ijedan post-->
 <div class="container">
   <label>Location:</label>
-  <input type="text" [(ngModel)] = "filterLocation">
+  <input type="text" [(ngModel)]="filterLocation" />
   <label>JobType:</label>
-  <input type="text" [(ngModel)] = "filterJobType">
+  <input type="text" [(ngModel)]="filterJobType" />
   <div class="row justify-content-start">
-    <div *ngFor = "let job of jobs | filter: filterLocation: 'location' : filterJobType: 'jobType' " class="col-md-3">
+    <div
+      *ngFor="
+        let job of jobs
+          | filter: filterLocation:'location':filterJobType:'jobType'
+      "
+      class="col-md-3"
+    >
       <div class="job-image">
         <img height="250" [src]="job.imagePath" />
       </div>

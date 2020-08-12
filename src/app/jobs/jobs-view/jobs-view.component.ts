@@ -12,8 +12,8 @@ export class JobsViewComponent implements OnInit {
   jobs: Job[] = [];
   private postsSub: Subscription;
 
-  filterLocation='';
-  filterJobType='';
+  public filterLocation = '';
+  public filterJobType = '';
   constructor(private jobsService: JobsService) {}
 
   ngOnInit(): void {
@@ -23,8 +23,6 @@ export class JobsViewComponent implements OnInit {
       .subscribe((jobs: Job[]) => {
         this.jobs = jobs;
 
-
-
         this.jobs.forEach((job) => {
           if (job.description.length > 150) {
             job.descSubstring = job.description.substring(0, 150) + '...';
@@ -32,7 +30,7 @@ export class JobsViewComponent implements OnInit {
         });
       });
   }
-  onDelete(jobId: string){
+  onDelete(jobId: string) {
     this.jobsService.deleteJob(jobId);
-    }
+  }
 }
