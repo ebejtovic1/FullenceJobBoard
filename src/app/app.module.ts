@@ -4,7 +4,6 @@ import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 import { JobsViewComponent } from './jobs/jobs-view/jobs-view.component';
 import { JobCreateComponent } from './jobs/job-create/job-create.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -28,7 +27,7 @@ import {FilterPipe} from './jobs/jobs-view/filter.pipe'
     CardComponent,
     JobsViewComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
     FilterPipe
   ],
   imports: [
