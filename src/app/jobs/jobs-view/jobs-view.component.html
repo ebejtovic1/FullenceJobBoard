@@ -1,5 +1,6 @@
 <!--Ako imamo ijedan post-->
 <div class="container">
+ 
   <div class="row">
     <div class="col">
       <div ngbDropdown class="d-inline-block">
@@ -27,15 +28,21 @@
   <br>
   </div>
 
+
+  <label>Location:</label>
+  <input type="text" [(ngModel)] = "filterLocation">
+  <label>JobType:</label>
+  <input type="text" [(ngModel)] = "filterJobType">
+ 
   <div class="row justify-content-start">
-    <div *ngFor="let job of jobs" class="col-md-3">
+    <div *ngFor = "let job of jobs | filter: filterLocation: 'location' : filterJobType: 'jobType' " class="col-md-3">
       <div class="job-image">
         <img height="250" [src]="job.imagePath" />
       </div>
       <div>
         <label class="textLabel">{{ job.title }}</label
         ><br />
-        <label class="textLabel">{{ job.firm }}</label>
+        <label class="textLabel">{{ job.jobType }}</label>
       </div>
       <div>
         <label class="textLabel">

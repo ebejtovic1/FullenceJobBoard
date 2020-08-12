@@ -4,6 +4,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { JobsViewComponent } from './jobs/jobs-view/jobs-view.component';
 import { JobCreateComponent } from './jobs/job-create/job-create.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -15,13 +16,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import {FilterPipe} from './jobs/jobs-view/filter.pipe'
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
     JobCreateComponent,
     CardComponent,
     JobsViewComponent,
-
+    FilterPipe
+ 
   ],
   imports: [
     BrowserModule,
@@ -34,8 +40,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatToolbarModule,
     MatProgressSpinnerModule,
     HttpClientModule,
+ 
     NgbModule,
-  ],
+
+    FormsModule
+],
   providers: [],
   bootstrap: [AppComponent],
 })
