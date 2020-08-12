@@ -38,19 +38,25 @@
         >Please enter a job description</mat-error
       >
     </mat-form-field>
-
-    <mat-form-field>
-      <textarea
-        matInput
-        rows="4"
-        formControlName="location"
-        placeholder="Post Location"
-      ></textarea>
-      <mat-error *ngIf="form.get('location').invalid"
-        >Please enter a job location</mat-error
+    <div style="margin-top: 5px;" ngbDropdown class="d-inline-block">
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownBasic1"
+        ngbDropdownToggle
       >
-    </mat-form-field>
-
+        Location
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button
+          (click)="setLocFilter(loc.location)"
+          *ngFor="let loc of locations"
+          mat-button
+          ngbDropdownItem
+        >
+          {{ loc.location }}
+        </button>
+      </div>
+    </div>
     <mat-form-field>
       <textarea
         matInput

@@ -5,6 +5,7 @@ import { JobCreateComponent } from './jobs/job-create/job-create.component';
 import { CardComponent } from './card/card.component';
 import { ShowMoreComponent } from 'src/app/jobs/show-more/show-more.component';
 
+
 const routes: Routes = [
   {
     path: 'card',

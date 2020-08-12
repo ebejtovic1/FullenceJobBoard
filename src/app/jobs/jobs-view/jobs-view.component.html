@@ -1,9 +1,68 @@
 <!--Ako imamo ijedan post-->
 <div class="container">
-  <label>Location:</label>
-  <input type="text" [(ngModel)]="filterLocation" />
-  <label>JobType:</label>
-  <input type="text" [(ngModel)]="filterJobType" />
+  <div class="row">
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          All locations
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button
+            (click)="setLocFilter(loc.location)"
+            *ngFor="let loc of locations"
+            mat-button
+            ngbDropdownItem
+          >
+            {{ loc.location }}
+          </button>
+        </div>
+      </div>
+      <button
+        style="margin-left: 4px;"
+        class="btn btn-danger"
+        (click)="resetLocation()"
+      >
+        Reset
+      </button>
+    </div>
+    <div class="row1">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button
+            class="btn btn-outline-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            All jobs
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a class="dropdown item" href="#"></a>
+            <button
+              *ngFor="let job of jobTypes"
+              mat-button
+              ngbDropdownItem
+              (click)="setJobFilter(job.jobType)"
+            >
+              {{ job.jobType }}
+            </button>
+          </div>
+        </div>
+        <button
+          style="margin-left: 4px;"
+          class="btn btn-danger"
+          (click)="resetJobType()"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+    <br />
+  </div>
+
   <div class="row justify-content-start">
     <div
       *ngFor="

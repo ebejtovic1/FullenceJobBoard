@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { JobsService } from 'src/app/jobs/job.service';
 import { Job } from 'src/app/jobs/job.model';
 import { Subscription } from 'rxjs';
+import { LocationService } from 'src/app/location/location.service';
+import { Location } from 'src/app/location/location.model';
+import { JobType } from 'src/app/jobs/job-Type/jobType.model';
+import { JobTypeService } from 'src/app/jobs/job-Type/jobType.service';
 
 @Component({
   selector: 'app-jobs-view',
@@ -10,13 +14,24 @@ import { Subscription } from 'rxjs';
 })
 export class JobsViewComponent implements OnInit {
   jobs: Job[] = [];
+  locations: Location[] = [];
+  jobTypes: JobType[] = [];
+
   private postsSub: Subscription;
+  private locationsSub: Subscription;
+  private jobTypSub: Subscription;
 
   public filterLocation = '';
   public filterJobType = '';
-  constructor(private jobsService: JobsService) {}
+
+  constructor(
+    private jobsService: JobsService,
+    private locationService: LocationService,
+    private jobTypeService: JobTypeService
+  ) {}
 
   ngOnInit(): void {
+    //kreiranje svih poslova
     this.jobsService.getJobs();
     this.postsSub = this.jobsService
       .getPostUpdateListener()
@@ -29,8 +44,39 @@ export class JobsViewComponent implements OnInit {
           } else job.descSubstring = job.description;
         });
       });
+    //kreiranje svih lokacija
+    this.locationService.getLocations();
+    this.locationsSub = this.locationService
+      .getLocationsUpdatedListener()
+      .subscribe((locs: Location[]) => {
+        this.locations = locs;
+      });
+
+    //kreiranje svih jobTypes
+
+    this.jobTypeService.getJobTypes();
+    this.jobTypSub = this.jobTypeService
+      .getJobUpdateListener()
+      .subscribe((jobTypes: JobType[]) => {
+        this.jobTypes = jobTypes;
+      });
   }
+
+  setJobFilter(job) {
+    this.filterJobType = job;
+  }
+
+  setLocFilter(loc) {
+    this.filterLocation = loc;
+  }
+
   onDelete(jobId: string) {
     this.jobsService.deleteJob(jobId);
+  }
+  resetLocation() {
+    this.filterLocation = '';
+  }
+  resetJobType() {
+    this.filterJobType = '';
   }
 }

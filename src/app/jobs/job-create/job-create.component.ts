@@ -5,6 +5,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { JobsService } from '../job.service';
 import { ActivatedRoute, ParamMap } from '@angular/router'; //da znamo da li idemo edit ili create posta, da li je id proslijeđen ili ne
 import { mimeType } from './mime-type.validator';
+import { LocationService } from 'src/app/location/location.service';
+import { Location } from 'src/app/location/location.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-job-create',
@@ -12,7 +15,14 @@ import { mimeType } from './mime-type.validator';
   styleUrls: ['./job-create.component.css'],
 })
 export class JobCreateComponent implements OnInit {
-  constructor(public jobsService: JobsService, public route: ActivatedRoute) {}
+  constructor(
+    public jobsService: JobsService,
+    public route: ActivatedRoute,
+    private locationService: LocationService
+  ) {}
+
+  locations: Location[] = [];
+  private locationsSub: Subscription;
 
   private mode = 'create';
   private jobId: string;
@@ -36,6 +46,14 @@ export class JobCreateComponent implements OnInit {
       jobType: new FormControl(null, { validators: [Validators.required] }),
       firm: new FormControl(null, { validators: [Validators.required] }),
     });
+
+    //kreiranje svih lokacija
+    this.locationService.getLocations();
+    this.locationsSub = this.locationService
+      .getLocationsUpdatedListener()
+      .subscribe((locs: Location[]) => {
+        this.locations = locs;
+      });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('postId')) {
@@ -115,4 +133,7 @@ export class JobCreateComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+  //podesavanje lokacije posla
+
+  setLocFilter(loc) {}
 }

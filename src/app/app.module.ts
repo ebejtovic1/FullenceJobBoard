@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
 import { ShowMoreComponent } from './jobs/show-more/show-more.component';
 import { FilterPipe } from './jobs/jobs-view/filter.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,9 @@ import { FilterPipe } from './jobs/jobs-view/filter.pipe';
     MatProgressSpinnerModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent],
 })
