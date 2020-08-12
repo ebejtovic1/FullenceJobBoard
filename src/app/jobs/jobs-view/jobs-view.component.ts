@@ -21,6 +21,8 @@ export class JobsViewComponent implements OnInit {
       .subscribe((jobs: Job[]) => {
         this.jobs = jobs;
 
+
+
         this.jobs.forEach((job) => {
           if (job.description.length > 150) {
             job.descSubstring = job.description.substring(0, 150) + '...';
@@ -28,4 +30,7 @@ export class JobsViewComponent implements OnInit {
         });
       });
   }
+  onDelete(jobId: string){
+    this.jobsService.deleteJob(jobId);
+    }
 }

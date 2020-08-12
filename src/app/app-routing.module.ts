@@ -10,14 +10,18 @@ const routes: Routes = [
     path: 'card',
     component: CardComponent,
   },
-  { path: 'showJobs', component: JobsViewComponent },
+  { path: '', component: JobsViewComponent },
   {
     path: 'create',
     component: JobCreateComponent,
   },
   {
-    path: 'showMore',
+    path: 'showMore/:jobId',
     component: ShowMoreComponent,
+  },
+  {
+    path: 'edit/:postId',
+    component: JobCreateComponent,
   },
 ];
 

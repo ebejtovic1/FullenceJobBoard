@@ -16,7 +16,9 @@
         </label>
       </div>
       <div class="buttonDiv">
-        <button class="btn btn-primary">Show More</button>
+        <button [routerLink]="['/showMore', job.id]" class="btn btn-primary">
+          Show More
+        </button>
       </div>
     </div>
   </div>
