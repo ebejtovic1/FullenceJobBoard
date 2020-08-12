@@ -1,9 +1,39 @@
 <!--Ako imamo ijedan post-->
 <div class="container">
+ 
+  <div class="row">
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Location</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem>Sarajevo</button>
+          <button ngbDropdownItem>Beograd</button>
+          <button ngbDropdownItem>Ljubljana</button>
+        </div>
+      </div>
+    </div>
+    <div class="row1">
+      <div class="col">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Type Job</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a class="dropdown item" href=#></a>
+            <button mat-button  ngbDropdownItem>IT</button>
+            <button mat-button color:red ngbDropdownItem>Economics</button>
+            <button mat-button color:red ngbDropdownItem>Law</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <br>
+  </div>
+
+
   <label>Location:</label>
   <input type="text" [(ngModel)] = "filterLocation">
   <label>JobType:</label>
   <input type="text" [(ngModel)] = "filterJobType">
+ 
   <div class="row justify-content-start">
     <div *ngFor = "let job of jobs | filter: filterLocation: 'location' : filterJobType: 'jobType' " class="col-md-3">
       <div class="job-image">

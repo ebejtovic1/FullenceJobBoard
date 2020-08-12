@@ -14,7 +14,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import {FilterPipe} from './jobs/jobs-view/filter.pipe'
+
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import {FilterPipe} from './jobs/jobs-view/filter.pipe'
     CardComponent,
     JobsViewComponent,
     FilterPipe
+ 
   ],
   imports: [
     BrowserModule,
@@ -36,8 +40,11 @@ import {FilterPipe} from './jobs/jobs-view/filter.pipe'
     MatToolbarModule,
     MatProgressSpinnerModule,
     HttpClientModule,
+ 
+    NgbModule,
+
     FormsModule
-  ],
+],
   providers: [],
   bootstrap: [AppComponent],
 })

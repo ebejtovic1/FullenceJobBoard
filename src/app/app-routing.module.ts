@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { JobCreateComponent } from './jobs/job-create/job-create.component';
 import { CardComponent } from './card/card.component';
 
+
 const routes: Routes = [
   {
     path: 'card',
