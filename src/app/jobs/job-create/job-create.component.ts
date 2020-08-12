@@ -8,6 +8,8 @@ import { mimeType } from './mime-type.validator';
 import { LocationService } from 'src/app/location/location.service';
 import { Location } from 'src/app/location/location.model';
 import { Subscription } from 'rxjs';
+import { JobType } from 'src/app/jobs/job-Type/jobType.model';
+import { JobTypeService } from 'src/app/jobs/job-Type/jobType.service';
 
 @Component({
   selector: 'app-job-create',
@@ -18,11 +20,14 @@ export class JobCreateComponent implements OnInit {
   constructor(
     public jobsService: JobsService,
     public route: ActivatedRoute,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private jobTypeService: JobTypeService
   ) {}
 
   locations: Location[] = [];
   private locationsSub: Subscription;
+  jobTypes: JobType[] = [];
+  private jobTypSub: Subscription;
 
   private mode = 'create';
   private jobId: string;
@@ -53,6 +58,15 @@ export class JobCreateComponent implements OnInit {
       .getLocationsUpdatedListener()
       .subscribe((locs: Location[]) => {
         this.locations = locs;
+      });
+
+    //kreiranje svih poslova
+
+    this.jobTypeService.getJobTypes();
+    this.jobTypSub = this.jobTypeService
+      .getJobUpdateListener()
+      .subscribe((jobTypes: JobType[]) => {
+        this.jobTypes = jobTypes;
       });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

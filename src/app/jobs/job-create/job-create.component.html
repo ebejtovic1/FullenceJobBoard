@@ -57,17 +57,29 @@
         </button>
       </div>
     </div>
-    <mat-form-field>
-      <textarea
-        matInput
-        rows="4"
-        formControlName="jobType"
-        placeholder="Job Type"
-      ></textarea>
-      <mat-error *ngIf="form.get('jobType').invalid"
-        >Please enter a job type</mat-error
+    <div style="margin-left: 30px;" ngbDropdown class="d-inline-block">
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownBasic2"
+        ngbDropdownToggle
       >
-    </mat-form-field>
+        Job Type
+      </button>
+      <div
+        style="margin-left: 20px;"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic2"
+      >
+        <button
+          (click)="setJobFilter(job.jobType)"
+          *ngFor="let job of jobTypes"
+          mat-button
+          ngbDropdownItem
+        >
+          {{ job.jobType }}
+        </button>
+      </div>
+    </div>
 
     <mat-form-field>
       <textarea
