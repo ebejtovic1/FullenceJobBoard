@@ -28,8 +28,9 @@ const jobSchema = mongoose.Schema({
   },
   descSubstring: {
     type: String,
-    required: true,
+    required: false,
   },
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
 });
 
 module.exports = mongoose.model("Job", jobSchema);

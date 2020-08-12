@@ -7,12 +7,15 @@ import { AppComponent } from './app.component';
 import { JobsViewComponent } from './jobs/jobs-view/jobs-view.component';
 import { JobCreateComponent } from './jobs/job-create/job-create.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
+import { LoginComponent } from "./auth/login/login.component";
+import { SignupComponent } from "./auth/signup/signup.component";
+import { AuthInterceptor } from "./auth/auth-interceptor";
 
 @NgModule({
   declarations: [
@@ -20,6 +23,8 @@ import { CardComponent } from './card/card.component';
     JobCreateComponent,
     CardComponent,
     JobsViewComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -32,8 +37,9 @@ import { CardComponent } from './card/card.component';
     MatToolbarModule,
     MatProgressSpinnerModule,
     HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
