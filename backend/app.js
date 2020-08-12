@@ -3,10 +3,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const Job = require("./models/job");
-const mongoose = require("mongoose");
 const postsRoutes = require("./routes/jobs");
 const locations = require("./routes/locations");
 const jobType = require("./routes/jobTypes");
+const mongoose = require("mongoose");
+
+const userRoutes = require("./routes/user");
 
 const { readBufferWithDetectedEncoding } = require("tslint/lib/utils");
 
@@ -29,7 +31,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -41,5 +43,6 @@ app.use((req, res, next) => {
 app.use("/api/jobs", postsRoutes);
 app.use("/api/locations", locations);
 app.use("/api/jobType", jobType);
+app.use("/api/user", userRoutes);
 
 module.exports = app;

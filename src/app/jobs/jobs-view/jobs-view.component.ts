@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { JobsService } from 'src/app/jobs/job.service';
 import { Job } from 'src/app/jobs/job.model';
 import { Subscription } from 'rxjs';
@@ -6,13 +6,14 @@ import { LocationService } from 'src/app/location/location.service';
 import { Location } from 'src/app/location/location.model';
 import { JobType } from 'src/app/jobs/job-Type/jobType.model';
 import { JobTypeService } from 'src/app/jobs/job-Type/jobType.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-jobs-view',
   templateUrl: './jobs-view.component.html',
   styleUrls: ['./jobs-view.component.css'],
 })
-export class JobsViewComponent implements OnInit {
+export class JobsViewComponent implements OnInit, OnDestroy {
   jobs: Job[] = [];
   locations: Location[] = [];
   jobTypes: JobType[] = [];
@@ -27,12 +28,23 @@ export class JobsViewComponent implements OnInit {
   constructor(
     private jobsService: JobsService,
     private locationService: LocationService,
-    private jobTypeService: JobTypeService
+    private jobTypeService: JobTypeService,
+    private authService: AuthService
   ) {}
+
+  totalPosts = 0;
+  postsPerPage = 2;
+  currentPage = 1;
+  pageSizeOptions = [1, 2, 5, 10];
+  userIsAuthenticated = false;
+  userId: string;
+
+  private authStatusSub: Subscription;
 
   ngOnInit(): void {
     //kreiranje svih poslova
     this.jobsService.getJobs();
+    this.userId = this.authService.getUserId();
     this.postsSub = this.jobsService
       .getPostUpdateListener()
       .subscribe((jobs: Job[]) => {
@@ -70,13 +82,26 @@ export class JobsViewComponent implements OnInit {
     this.filterLocation = loc;
   }
 
-  onDelete(jobId: string) {
-    this.jobsService.deleteJob(jobId);
-  }
   resetLocation() {
     this.filterLocation = '';
   }
   resetJobType() {
     this.filterJobType = '';
+
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe((isAuthenticated) => {
+        this.userIsAuthenticated = isAuthenticated;
+        this.userId = this.authService.getUserId();
+      });
+  }
+  onDelete(jobId: string) {
+    this.jobsService.deleteJob(jobId);
+  }
+
+  ngOnDestroy() {
+    this.postsSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 }

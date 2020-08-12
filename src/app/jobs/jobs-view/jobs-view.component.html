@@ -88,7 +88,12 @@
         <button [routerLink]="['/showMore', job.id]" class="btn btn-primary">
           Show More
         </button>
-      </div>
+        <!---    <button class="btn btn-info">Show More</button>
+        <mat-action-row *ngIf="userIsAuthenticated">
+          <button mat-button color="warn" (click)="onDelete(job.id)">Delete</button>
+          <a mat-button color="primary" [routerLink]="['/edit', job.id]">Edit</a>
+        </mat-action-row>
+      --></div>
     </div>
   </div>
 </div>
