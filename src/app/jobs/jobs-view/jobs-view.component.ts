@@ -23,6 +23,9 @@ export class JobsViewComponent implements OnInit, OnDestroy {
 
   constructor(private jobsService: JobsService, private authService: AuthService) { }
 
+  filterLocation='';
+  filterJobType='';
+
   ngOnInit(): void {
     this.jobsService.getJobs();
     this.userId = this.authService.getUserId();
