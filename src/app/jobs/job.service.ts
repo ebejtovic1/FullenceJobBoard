@@ -82,6 +82,15 @@ export class JobsService {
         this.router.navigate(['/']);
       });
   }
+  deleteJob(jobId:string){
+    this.http.delete("http://localhost:3000/api/jobs/" + jobId)
+    .subscribe(()=>{
+      const updatedJobs = this.jobs.filter(job => job.id!==jobId);
+      this.jobs = updatedJobs;
+      this.jobsUpdated.next([...this.jobs]);
+    });
+  }
+
 
   updateJob(
     id: string,
