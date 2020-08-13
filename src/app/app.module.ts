@@ -4,18 +4,34 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { JobsViewComponent } from './jobs/jobs-view/jobs-view.component';
 import { JobCreateComponent } from './jobs/job-create/job-create.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
+import { CardComponent } from './card/card.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ShowMoreComponent } from './jobs/show-more/show-more.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterPipe } from './jobs/jobs-view/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JobCreateComponent
+    JobCreateComponent,
+    CardComponent,
+    JobsViewComponent,
+    ShowMoreComponent,
+    FilterPipe,
+    LoginComponent,
+    SignupComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -23,14 +39,18 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatSelectModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
-    HttpClientModule
-
+    HttpClientModule,
+    FormsModule,
+    NgbModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
