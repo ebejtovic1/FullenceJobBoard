@@ -32,12 +32,21 @@ router.post(
   checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
+
+    let imagePath = req.body.imagePath;
+
+    if (req.file) {
+      const url = req.protocol + '://' + req.get("host");
+      imagePath = url + "/images/" + req.file.filename
+
+    }
+
     const url = req.protocol + "://" + req.get("host");
     const post = new Job({
       //ovo je post iz baze
       title: req.body.title,
       description: req.body.description,
-      imagePath: url + "/images/" + req.file.filename,
+      imagePath: imagePath,
       location: req.body.location,
       jobType: req.body.jobType,
       firm: req.body.firm,
@@ -47,7 +56,7 @@ router.post(
 
     post
       .save()
-      .then((result) => {
+      .then((result) => { 
         res.status(201).json({
           message: "Job added succesfully!",
           post: {
@@ -87,37 +96,37 @@ router.put(
     let imagePath = req.body.imagePath;
 
 
-  if (req.file) {
-    const url = req.protocol + '://' + req.get("host");
-    imagePath = url + "/images/" + req.file.filename
+    if (req.file) {
+      const url = req.protocol + '://' + req.get("host");
+      imagePath = url + "/images/" + req.file.filename
 
-  }
-  const post = new Job({
-    _id: req.body.id,
-    title: req.body.title,
-    description: req.body.description,
-    imagePath: imagePath,
-    location: req.body.location,
-    jobType: req.body.jobType,
-    firm: req.body.firm,
-    creator: req.userData.userId,
-    companyInfo: req.body.companyInfo
-  });
-
-  Job.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
-    if (result.nModified > 0) {
-      res.status(200).json({ message: "Update successful!" });
-    } else {
-      res.status(402).json({
-        message: "No updates were made!"
-      });
     }
-  })
-    .catch(error => {
-      res.status(500).json({
-        message: "Couldn't update job!"
-      });
+    const post = new Job({
+      _id: req.body.id,
+      title: req.body.title,
+      description: req.body.description,
+      imagePath: imagePath,
+      location: req.body.location,
+      jobType: req.body.jobType,
+      firm: req.body.firm,
+      creator: req.userData.userId,
+      companyInfo: req.body.companyInfo
     });
+
+    Job.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
+      if (result.nModified > 0) {
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        res.status(402).json({
+          message: "No updates were made!"
+        });
+      }
+    })
+      .catch(error => {
+        res.status(500).json({
+          message: "Couldn't update job!"
+        });
+      });
 
     Job.updateOne({ _id: req.params.id, creator: req.userData.userId }, post)
       .then((result) => {
