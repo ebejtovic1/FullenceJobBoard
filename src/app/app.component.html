@@ -307,7 +307,10 @@
   </div>
   <span class="groupName">FullenceJobBoard</span>
   <span class="spacer"></span>
-  <a routerLink="/create" class="btn btn-info">Create job</a>
+  <a routerLink="/create" style="margin-right: 10px;" class="btn btn-info"
+    >Create job</a
+  >
+  <a routerLink="/" class="btn btn-info">All Jobs</a>
   <span class="spacer"></span>
   <button *ngIf="!userIsAuthenticated" mat-button routerLink="/login" routerLinkActive="mat-accent">Log In</button>
   <button *ngIf="!userIsAuthenticated" mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign Up</button>

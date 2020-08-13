@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,12 +13,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
-import { LoginComponent } from "./auth/login/login.component";
-import { SignupComponent } from "./auth/signup/signup.component";
-import { AuthInterceptor } from "./auth/auth-interceptor";
+import { ShowMoreComponent } from './jobs/show-more/show-more.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FilterPipe} from './jobs/jobs-view/filter.pipe'
-
+import { FilterPipe } from './jobs/jobs-view/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,9 +26,10 @@ import {FilterPipe} from './jobs/jobs-view/filter.pipe'
     JobCreateComponent,
     CardComponent,
     JobsViewComponent,
+    ShowMoreComponent,
+    FilterPipe,
     LoginComponent,
     SignupComponent,
-    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -42,9 +43,11 @@ import {FilterPipe} from './jobs/jobs-view/filter.pipe'
     MatProgressSpinnerModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,37 @@
+.container {
+  background-color: black;
+}
+.card {
+  margin: auto;
+  margin-top: 100px;
+  max-width: 70%;
+}
+.card-header {
+  text-align: center;
+  font-family: "Georgia", serif;
+  font-size: 20pt;
+  font-weight: bold;
+  align-items: center;
+}
+.job-image {
+  max-height: 50%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  border: 1px solid black;
+  margin-top: 20px;
+  border-radius: 5%;
+  max-width: 25%;
+  margin: auto;
+}
+img {
+  width: 100%;
+  border-radius: 5%;
+  border: 2px solid black;
+}
+.textLabel {
+  margin-top: 5px;
+  color: black;
+  word-break: break-all;
+  font-family: "Georgia", serif;
+  font-weight: bold;
+}
