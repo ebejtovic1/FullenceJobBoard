@@ -34,6 +34,10 @@ const jobSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  companyInfo: {
+    type: String,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("Job", jobSchema);

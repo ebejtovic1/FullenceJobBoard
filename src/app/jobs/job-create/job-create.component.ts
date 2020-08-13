@@ -24,7 +24,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     private locationService: LocationService,
     private jobTypeService: JobTypeService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   public filterLocation = '';
   public filterJobType = '';
@@ -47,7 +47,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authStatusSub = this.authService
       .getAuthStatusListener()
-      .subscribe(authStatus => {
+      .subscribe((authStatus) => {
         this.isLoading = false;
       });
 
@@ -63,6 +63,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
       location: new FormControl(null, { validators: [Validators.required] }),
       jobType: new FormControl(null, { validators: [Validators.required] }),
       firm: new FormControl(null, { validators: [Validators.required] }),
+      companyInfo: new FormControl(null, { validators: [Validators.required] }),
     });
 
     //kreiranje svih lokacija
@@ -91,9 +92,27 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         console.log(this.jobsService.getJob(this.jobId));
         this.jobsService.getJob(this.jobId).subscribe((postData) => {
           this.isLoading = false;
-          this.job = { id: postData._id, title: postData.title, description: postData.description, imagePath: postData.imagePath, location: postData.location, jobType: postData.jobType, firm: postData.firm, descSubstring: postData.descSubstring, creator: postData.creator };
-          this.form.setValue({ title: this.job.title, description: this.job.description, image: this.job.imagePath, location: this.job.location, jobType: this.job.jobType, firm: this.job.firm });
-
+          this.job = {
+            id: postData._id,
+            title: postData.title,
+            description: postData.description,
+            imagePath: postData.imagePath,
+            location: postData.location,
+            jobType: postData.jobType,
+            firm: postData.firm,
+            descSubstring: postData.descSubstring,
+            creator: postData.creator,
+            companyInfo: postData.companyInfo,
+          };
+          this.form.setValue({
+            title: this.job.title,
+            description: this.job.description,
+            image: this.job.imagePath,
+            location: this.job.location,
+            jobType: this.job.jobType,
+            firm: this.job.firm,
+            companyInfo: this.job.companyInfo,
+          });
         });
       } else {
         this.mode = 'create';
@@ -107,10 +126,11 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     console.log(jobType);
   }
   onSavePost() {
+    console.log(this.form.value.companyInfo);
     if (this.form.invalid) {
       return;
     }
-  
+
     this.isLoading = true;
     if (this.mode === 'create') {
       this.jobsService.addJob(
@@ -120,8 +140,8 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.form.value.location,
         this.form.value.jobType,
         this.form.value.firm,
-        ''
-
+        '',
+        this.form.value.companyInfo
       );
     } else {
       this.jobsService.updateJob(
@@ -131,7 +151,8 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.form.value.image,
         this.form.value.location,
         this.form.value.jobType,
-        this.form.value.firm
+        this.form.value.firm,
+        this.form.value.companyInfo
       );
     }
     this.form.reset();
@@ -159,5 +180,4 @@ export class JobCreateComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authStatusSub.unsubscribe();
   }
-
 }

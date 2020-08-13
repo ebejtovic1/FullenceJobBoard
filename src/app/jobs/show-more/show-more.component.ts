@@ -32,6 +32,7 @@ export class ShowMoreComponent implements OnInit {
     firm: '',
     descSubstring: '',
     creator: '',
+    companyInfo: '',
   };
   private jobId: string;
   isLoading = false;
@@ -62,6 +63,7 @@ export class ShowMoreComponent implements OnInit {
             firm: postData.firm,
             descSubstring: postData.descSubstring,
             creator: postData.creator,
+            companyInfo: postData.companyInfo,
           };
         });
       }
