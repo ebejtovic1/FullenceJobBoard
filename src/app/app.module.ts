@@ -25,6 +25,7 @@ import { ErrorInterceptor } from './error-interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './error/error.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
+    MatIconModule,
     MatButtonModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
