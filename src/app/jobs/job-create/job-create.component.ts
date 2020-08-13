@@ -4,16 +4,30 @@ import { NgForOf } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { JobsService } from '../job.service';
 import { ActivatedRoute, ParamMap } from '@angular/router'; //da znamo da li idemo edit ili create posta, da li je id proslijeđen ili ne
-import { mimeType } from "./mime-type.validator";
+import { mimeType } from './mime-type.validator';
+import { LocationService } from 'src/app/location/location.service';
+import { Location } from 'src/app/location/location.model';
+import { Subscription } from 'rxjs';
+import { JobType } from 'src/app/jobs/job-Type/jobType.model';
+import { JobTypeService } from 'src/app/jobs/job-Type/jobType.service';
 
 @Component({
   selector: 'app-job-create',
   templateUrl: './job-create.component.html',
-  styleUrls: ['./job-create.component.css']
+  styleUrls: ['./job-create.component.css'],
 })
 export class JobCreateComponent implements OnInit {
+  constructor(
+    public jobsService: JobsService,
+    public route: ActivatedRoute,
+    private locationService: LocationService,
+    private jobTypeService: JobTypeService
+  ) {}
 
-  constructor(public jobsService: JobsService, public route: ActivatedRoute) { }
+  locations: Location[] = [];
+  private locationsSub: Subscription;
+  jobTypes: JobType[] = [];
+  private jobTypSub: Subscription;
 
   private mode = 'create';
   private jobId: string;
@@ -24,40 +38,51 @@ export class JobCreateComponent implements OnInit {
   form: FormGroup;
   job: Job;
   ngOnInit(): void {
-
     this.form = new FormGroup({
-      title: new FormControl(null,
-        { validators: [Validators.required, Validators.minLength(3)] }),
-      description: new FormControl(null,
-        { validators: [Validators.required] }),
-      image: new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
-      location: new FormControl(null,
-        { validators: [Validators.required] }),
-      jobType: new FormControl(null,
-        { validators: [Validators.required] }),
-      firm: new FormControl(null,
-        { validators: [Validators.required] }),
-
+      title: new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(3)],
+      }),
+      description: new FormControl(null, { validators: [Validators.required] }),
+      image: new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType],
+      }),
+      location: new FormControl(null, { validators: [Validators.required] }),
+      jobType: new FormControl(null, { validators: [Validators.required] }),
+      firm: new FormControl(null, { validators: [Validators.required] }),
     });
 
+    //kreiranje svih lokacija
+    this.locationService.getLocations();
+    this.locationsSub = this.locationService
+      .getLocationsUpdatedListener()
+      .subscribe((locs: Location[]) => {
+        this.locations = locs;
+      });
+
+    //kreiranje svih poslova
+
+    this.jobTypeService.getJobTypes();
+    this.jobTypSub = this.jobTypeService
+      .getJobUpdateListener()
+      .subscribe((jobTypes: JobType[]) => {
+        this.jobTypes = jobTypes;
+      });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
-
       if (paramMap.has('postId')) {
-
         this.mode = 'edit';
         this.jobId = paramMap.get('postId');
         this.isLoading = true;
 
-        console.log( this.jobsService.getJob(this.jobId))
-        this.jobsService.getJob(this.jobId).subscribe(postData => {
-
+        console.log(this.jobsService.getJob(this.jobId));
+        this.jobsService.getJob(this.jobId).subscribe((postData) => {
           this.isLoading = false;
           this.job = { id: postData._id, title: postData.title, description: postData.description, imagePath: postData.imagePath, location: postData.location, jobType: postData.jobType, firm: postData.firm, descSubstring: postData.descSubstring, creator: postData.creator };
           this.form.setValue({ title: this.job.title, description: this.job.description, image: this.job.imagePath, location: this.job.location , jobType: this.job.jobType, firm: this.job.firm});
+
         });
-      }
-      else {
+      } else {
         this.mode = 'create';
         this.jobId = null;
       }
@@ -75,10 +100,25 @@ export class JobCreateComponent implements OnInit {
 
     this.isLoading = true;
     if (this.mode === 'create') {
-      this.jobsService.addJob(this.form.value.title, this.form.value.description, this.form.value.image, this.form.value.location, this.form.value.jobType, this.form.value.firm, "")
-    }
-    else {
-      this.jobsService.updateJob(this.jobId, this.form.value.title, this.form.value.description, this.form.value.image, this.form.value.location, this.form.value.jobType, this.form.value.firm);
+      this.jobsService.addJob(
+        this.form.value.title,
+        this.form.value.description,
+        this.form.value.image,
+        this.form.value.location,
+        this.form.value.jobType,
+        this.form.value.firm,
+        ''
+      );
+    } else {
+      this.jobsService.updateJob(
+        this.jobId,
+        this.form.value.title,
+        this.form.value.description,
+        this.form.value.image,
+        this.form.value.location,
+        this.form.value.jobType,
+        this.form.value.firm
+      );
     }
     this.form.reset();
   }
@@ -92,5 +132,7 @@ export class JobCreateComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
+  //podesavanje lokacije posla
 
+  setLocFilter(loc) {}
 }

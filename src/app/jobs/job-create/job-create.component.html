@@ -1,4 +1,4 @@
-<mat-card class="matCard">
+<mat-card style="margin-top: 70px;" class="matCard">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <!--Sljedeca linija daje nam pristup objektu-->
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
@@ -38,30 +38,48 @@
         >Please enter a job description</mat-error
       >
     </mat-form-field>
-
-    <mat-form-field>
-      <textarea
-        matInput
-        rows="4"
-        formControlName="location"
-        placeholder="Post Location"
-      ></textarea>
-      <mat-error *ngIf="form.get('location').invalid"
-        >Please enter a job location</mat-error
+    <div style="margin-top: 5px;" ngbDropdown class="d-inline-block">
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownBasic1"
+        ngbDropdownToggle
       >
-    </mat-form-field>
-
-    <mat-form-field>
-      <textarea
-        matInput
-        rows="4"
-        formControlName="jobType"
-        placeholder="Job Type"
-      ></textarea>
-      <mat-error *ngIf="form.get('jobType').invalid"
-        >Please enter a job type</mat-error
+        Location
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button
+          (click)="setLocFilter(loc.location)"
+          *ngFor="let loc of locations"
+          mat-button
+          ngbDropdownItem
+        >
+          {{ loc.location }}
+        </button>
+      </div>
+    </div>
+    <div style="margin-left: 30px;" ngbDropdown class="d-inline-block">
+      <button
+        class="btn btn-outline-primary"
+        id="dropdownBasic2"
+        ngbDropdownToggle
       >
-    </mat-form-field>
+        Job Type
+      </button>
+      <div
+        style="margin-left: 20px;"
+        ngbDropdownMenu
+        aria-labelledby="dropdownBasic2"
+      >
+        <button
+          (click)="setJobFilter(job.jobType)"
+          *ngFor="let job of jobTypes"
+          mat-button
+          ngbDropdownItem
+        >
+          {{ job.jobType }}
+        </button>
+      </div>
+    </div>
 
     <mat-form-field>
       <textarea

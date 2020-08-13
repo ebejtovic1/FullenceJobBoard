@@ -52,7 +52,6 @@ export class JobsService {
     jobType: string,
     firm: string,
     descSubstring: string
-
   ) {
     const jobData = new FormData();
     jobData.append('title', title);
@@ -78,19 +77,21 @@ export class JobsService {
           firm: firm,
           descSubstring:"",
           creator: responseData.post.creator
+
         };
         this.jobs.push(post);
         this.jobsUpdated.next([...this.jobs]);
         this.router.navigate(['/']);
       });
   }
-  deleteJob(jobId:string){
-    this.http.delete("http://localhost:3000/api/jobs/" + jobId)
-    .subscribe(()=>{
-      const updatedJobs = this.jobs.filter(job => job.id!==jobId);
-      this.jobs = updatedJobs;
-      this.jobsUpdated.next([...this.jobs]);
-    });
+  deleteJob(jobId: string) {
+    this.http
+      .delete('http://localhost:3000/api/jobs/' + jobId)
+      .subscribe(() => {
+        const updatedJobs = this.jobs.filter((job) => job.id !== jobId);
+        this.jobs = updatedJobs;
+        this.jobsUpdated.next([...this.jobs]);
+      });
   }
 
   updateJob(
@@ -100,7 +101,7 @@ export class JobsService {
     image: File | string,
     location: string,
     jobType: string,
-    firm: string,
+    firm: string
   ) {
     let jobData: Job | FormData;
     if (typeof image === 'object') {
@@ -156,5 +157,6 @@ export class JobsService {
 
   getJob(id: string){
     return this.http.get<{_id: string, title: string, description: string, imagePath: string, location: string, jobType: string, firm: string,descSubstring:string, creator:string }>("http://localhost:3000/api/jobs/" + id);
+
   }
 }

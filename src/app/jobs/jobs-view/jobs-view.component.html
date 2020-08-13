@@ -1,66 +1,101 @@
 <!--Ako imamo ijedan post-->
 <div class="container">
-
   <div class="row">
     <div class="col">
       <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Location</button>
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          All locations
+        </button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem>Sarajevo</button>
-          <button ngbDropdownItem>Beograd</button>
-          <button ngbDropdownItem>Ljubljana</button>
+          <button
+            (click)="setLocFilter(loc.location)"
+            *ngFor="let loc of locations"
+            mat-button
+            ngbDropdownItem
+          >
+            {{ loc.location }}
+          </button>
         </div>
       </div>
+      <button
+        style="margin-left: 4px;"
+        class="btn btn-danger"
+        (click)="resetLocation()"
+      >
+        Reset
+      </button>
     </div>
     <div class="row1">
       <div class="col">
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Type Job</button>
+          <button
+            class="btn btn-outline-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            All jobs
+          </button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <a class="dropdown item" href=#></a>
-            <button mat-button ngbDropdownItem>IT</button>
-            <button mat-button color:red ngbDropdownItem>Economics</button>
-            <button mat-button color:red ngbDropdownItem>Law</button>
+ <a class="dropdown item" href="#"></a>
+            <button
+              *ngFor="let job of jobTypes"
+              mat-button
+              ngbDropdownItem
+              (click)="setJobFilter(job.jobType)"
+            >
+              {{ job.jobType }}
+            </button>
           </div>
         </div>
+        <button
+          style="margin-left: 4px;"
+          class="btn btn-danger"
+          (click)="resetJobType()"
+        >
+          Reset
+        </button>
       </div>
     </div>
-    <br>
+    <br />
   </div>
 
-  <label>Location:</label>
-  <input type="text" [(ngModel)]="filterLocation">
-  <label>JobType:</label>
-  <input type="text" [(ngModel)]="filterJobType">
-  <button *ngIf="userIsAuthenticated" (click)="onMyJobs()" mat-button>My Jobs</button>
-
   <div class="row justify-content-start">
-    
-      <ng-container  *ngFor="let job of jobs | filter: filterLocation: 'location' : filterJobType: 'jobType' " >
-        <ng-container *ngIf="!userIsAuthenticated || myJobs || userId === job.creator">
-          <div class="col-md-3">
-        <div class="job-image">
-          <img height="250" [src]="job.imagePath" />
-   
-        </div>
-        <div>
-          <label class="textLabel">{{ job.title }}</label><br />
-          <label class="textLabel">{{ job.jobType }}</label>
-        </div>
-        <div>
-          <label class="textLabel">
-            {{ job.descSubstring }}
-          </label>
-        </div>
-        <div class="buttonDiv">
-          <button class="btn btn-info">Show More</button>
-          <mat-action-row *ngIf="userIsAuthenticated && userId === job.creator">
-            <button mat-button color="warn" (click)="onDelete(job.id)">Delete</button>
-            <a mat-button color="primary" [routerLink]="['/edit', job.id]">Edit</a>
-          </mat-action-row>
-        </div>
-        </div>
-      </ng-container>
-    </ng-container >
+    <div
+      *ngFor="
+        let job of jobs
+          | filter: filterLocation:'location':filterJobType:'jobType'
+      "
+      class="col-md-3"
+    >
+              <ng-container *ngIf="!userIsAuthenticated || myJobs || userId === job.creator">
+      <div class="job-image">
+        <img height="250" [src]="job.imagePath" />
+      </div>
+      <div>
+        <label class="textLabel">{{ job.title }}</label
+        ><br />
+        <label class="textLabel">{{ job.jobType }}</label>
+      </div>
+      <div>
+        <label class="textLabel">
+          {{ job.descSubstring }}
+        </label>
+      </div>
+      <div class="buttonDiv">
+        <button [routerLink]="['/showMore', job.id]" class="btn btn-primary">
+          Show More
+        </button>
+        <!---    <button class="btn btn-info">Show More</button>
+        <mat-action-row *ngIf="userIsAuthenticated">
+          <button mat-button color="warn" (click)="onDelete(job.id)">Delete</button>
+          <a mat-button color="primary" [routerLink]="['/edit', job.id]">Edit</a>
+        </mat-action-row>
+      --></div>
+    </div>
+        </ng-container>
   </div>
 </div>
