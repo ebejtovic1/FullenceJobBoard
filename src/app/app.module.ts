@@ -20,7 +20,9 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './jobs/jobs-view/filter.pipe';
+import { ErrorInterceptor } from './error-interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorComponent } from './error/error.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 @NgModule({
@@ -53,7 +55,9 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent],
 })
 export class AppModule {}
