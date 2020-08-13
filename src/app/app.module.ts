@@ -20,6 +20,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './jobs/jobs-view/filter.pipe';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FilterPipe } from './jobs/jobs-view/filter.pipe';
   ],
   imports: [
     BrowserModule,
+    MatSlideToggleModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

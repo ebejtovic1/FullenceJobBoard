@@ -12,6 +12,11 @@ mat-spinner{
 input[type="file"]{
   visibility: hidden;
 }
+mat-card{
+  width:60%;
+  margin: auto;
+  margin-top: 4000px;
+}
 
 
 .image-preview{
