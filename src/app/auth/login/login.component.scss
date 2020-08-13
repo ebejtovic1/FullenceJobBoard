@@ -33,6 +33,7 @@ label {
   font-weight:  400;
 }
 form {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   padding:  40px 30px;
   background:  #fefefe;
   display:  flex;
@@ -216,6 +217,7 @@ i {
 }
 
 .left {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   width:  220px;
   height:  auto;
   min-height:  100%;
