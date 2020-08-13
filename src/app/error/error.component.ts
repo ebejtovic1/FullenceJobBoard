@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 @Component({
     templateUrl: './error.component.html',
     selector: 'app-error',
+    styleUrls: ['./error.component.css']
 })
 export class ErrorComponent {
     constructor(
