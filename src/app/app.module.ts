@@ -20,6 +20,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './jobs/jobs-view/filter.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { FilterPipe } from './jobs/jobs-view/filter.pipe';
     FilterPipe,
     LoginComponent,
     SignupComponent,
-
+    DeleteModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ import { FilterPipe } from './jobs/jobs-view/filter.pipe';
     HttpClientModule,
     FormsModule,
     NgbModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
