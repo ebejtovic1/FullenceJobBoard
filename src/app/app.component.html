@@ -308,32 +308,13 @@
   </div>
 
   <span class="spacer"></span>
-  <a
-    *ngIf="userIsAuthenticated"
-    routerLink="/create"
-    style="margin-right: 10px;"
-    >Create job</a
-  >
-  <a routerLink="/card" mat-button>About us</a>
-  <button
-    *ngIf="!userIsAuthenticated"
-    mat-button
-    routerLink="/login"
-    routerLinkActive="mat-accent"
-  >
-    Log In
-  </button>
-  <button
-    *ngIf="!userIsAuthenticated"
-    mat-button
-    routerLink="/signup"
-    routerLinkActive="mat-accent"
-  >
-    Sign Up
-  </button>
-  <button *ngIf="userIsAuthenticated" (click)="onLogout()" mat-button>
-    Log Out
-  </button>
+
+  <button *ngIf="userIsAuthenticated" mat-button routerLink="/create" routerLinkActive="mat-accent">Create job</button>
+  <button mat-button routerLink="/card"  routerLinkActive="mat-accent">About Us</button>
+  <button *ngIf="!userIsAuthenticated" mat-button routerLink="/login" routerLinkActive="mat-accent">Log In</button>
+  <button *ngIf="!userIsAuthenticated" mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign Up</button>
+  <button *ngIf="userIsAuthenticated" (click)="onLogout()" mat-button> Log Out</button>
+
 </div>
 <div>
   <router-outlet></router-outlet>
