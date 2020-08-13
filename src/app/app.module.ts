@@ -20,6 +20,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './jobs/jobs-view/filter.pipe';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ErrorInterceptor } from './error-interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ErrorComponent } from './error/error.component';
@@ -39,6 +40,7 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
   ],
   imports: [
     BrowserModule,
+    MatSlideToggleModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

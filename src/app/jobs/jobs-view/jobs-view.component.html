@@ -1,104 +1,78 @@
 <!--Ako imamo ijedan post-->
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <div ngbDropdown class="d-inline-block">
-        <button
-          class="btn btn-outline-primary"
-          id="dropdownBasic1"
-          ngbDropdownToggle
-        >
-          All locations
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button
-            (click)="setLocFilter(loc.location)"
-            *ngFor="let loc of locations"
-            mat-button
-            ngbDropdownItem
-          >
-            {{ loc.location }}
-          </button>
-        </div>
-      </div>
-      <button *ngIf="userIsAuthenticated" (click)="onMyJobs()" mat-button>
-        My Jobs
-      </button>
-      <button
-        style="margin-left: 4px;"
-        class="btn btn-danger"
-        (click)="resetLocation()"
-      >
-        Reset
-      </button>
-    </div>
-    <div class="row1">
-      <div class="col">
-        <div ngbDropdown class="d-inline-block">
-          <button
-            class="btn btn-outline-primary"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-          >
-            All jobs
-          </button>
-          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <a class="dropdown item" href="#"></a>
-            <button
-              *ngFor="let job of jobTypes"
-              mat-button
-              ngbDropdownItem
-              (click)="setJobFilter(job.jobType)"
-            >
-              {{ job.jobType }}
-            </button>
-          </div>
-        </div>
-        <button
-          style="margin-left: 4px;"
-          class="btn btn-danger"
-          (click)="resetJobType()"
-        >
-          Reset
-        </button>
-      </div>
-    </div>
+
+  <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-8">
+    <input class="form-control form-control-sm mr-6 w-100" type="text" placeholder="Search..." aria-label="Search">
+  </form>
+
+  <br>
+  <br>
+  <br>
+  <div class="dugmad">
+
+    <mat-slide-toggle
+    *ngIf="userIsAuthenticated" (click)="onMyJobs()">My Jobs</mat-slide-toggle>
+      <mat-form-field appearance="fill">
+
+        <mat-label>All locations</mat-label>
+
+        <mat-select style="color: blue;">
+          <mat-option (click)="resetLocation()">None</mat-option>
+          <mat-option (click)="setLocFilter(loc.location)" *ngFor="let loc of locations" [value]="loc.location">
+            {{loc.location}}
+
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+        <mat-form-field style="margin-left:10px;" appearance="fill">
+          <mat-label>All jobs</mat-label>
+          <mat-select>
+            <mat-option (click)="resetJobType()">None</mat-option>
+            <mat-option (click)="setJobFilter(jobtype.jobType)" *ngFor="let jobtype of jobTypes" [value]="jobtype.jobType">
+              {{jobtype.jobType}}
+
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+
     <br />
-  </div>
+</div>
+
+<div class="dva">
   <div class="row justify-content-start">
-    <ng-container
-      *ngFor="
+
+    <ng-container class="klasa" *ngFor="
         let job of jobs
           | filter: filterLocation:'location':filterJobType:'jobType'
-      "
-    >
-      <ng-container
-        *ngIf="!userIsAuthenticated || !myJobs || userId === job.creator"
-      >
-        <div class="col-md-3">
-          <div class="job-image">
+      ">
+      <ng-container *ngIf="!userIsAuthenticated  || !myJobs || userId === job.creator">
+      <div class="card mb-3" style="max-width: 700px; max-height: 300px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
             <img height="250" [src]="job.imagePath" />
           </div>
-          <div>
-            <label class="textLabel">{{ job.title }}</label
-            ><br />
-            <label class="textLabel">{{ job.jobType }}</label>
-          </div>
-          <div>
-            <label class="textLabel">
-              {{ job.descSubstring }}
-            </label>
-          </div>
-          <div class="buttonDiv">
-            <button
-              [routerLink]="['/showMore', job.id]"
-              class="btn btn-primary"
-            >
-              Show More
-            </button>
+          <div class="col-md-8">
+            <div class="card-body">
+
+              <h5 class="textLabel">{{ job.title }}</h5>
+              <p class="card-text"><small class="text-muted">{{job.jobType }} </small></p><br />
+              <p class="card-text">{{ job.descSubstring }}</p>
+
+            </div>
+            <div class="buttonDiv">
+              <button [routerLink]="['/showMore', job.id]" class="btn btn-primary">
+                Show More
+              </button>
+            </div>
+
           </div>
         </div>
+      </div>
       </ng-container>
     </ng-container>
+  </div>
   </div>
 </div>

@@ -300,41 +300,23 @@
 </style>
 
 <!-- Toolbar -->
-<div class="toolbar">
+
+<div class="toolbar" role="banner">
+
   <div height="50" width="50" class="logo-image">
     <img height="50" width="50" src="assets/logo.jpg" />
-    <span class="groupName">FullenceJobBoard</span>
+    <a  routerLink="/" class="Naziv">FullenceJobBoard</a>
   </div>
+
+
   <span class="spacer"></span>
-  <a
-    *ngIf="userIsAuthenticated"
-    routerLink="/create"
-    style="margin-right: 10px;"
-    class="btn btn-info"
-    >Create job</a
-  >
-  <a routerLink="/" class="btn btn-info">All Jobs</a>
-  <span class="spacer"></span>
-  <button
-    *ngIf="!userIsAuthenticated"
-    mat-button
-    routerLink="/login"
-    routerLinkActive="mat-accent"
-  >
-    Log In
-  </button>
-  <button
-    *ngIf="!userIsAuthenticated"
-    mat-button
-    routerLink="/signup"
-    routerLinkActive="mat-accent"
-  >
-    Sign Up
-  </button>
-  <button *ngIf="userIsAuthenticated" (click)="onLogout()" mat-button>
-    Log Out
-  </button>
-  <a routerLink="/card" class="btn btn-info">About us</a>
+  <a *ngIf="userIsAuthenticated" routerLink="/create" style="margin-right: 10px;">Create job</a>
+  <a routerLink="/card" mat-button>About us</a>
+  <button *ngIf="!userIsAuthenticated" mat-button routerLink="/login" routerLinkActive="mat-accent">Log In</button>
+  <button *ngIf="!userIsAuthenticated" mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign Up</button>
+  <button *ngIf="userIsAuthenticated" (click)="onLogout()" mat-button> Log Out</button>
+
+
 </div>
 <div>
   <router-outlet></router-outlet>
