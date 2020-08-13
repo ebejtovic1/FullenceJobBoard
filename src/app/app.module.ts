@@ -21,6 +21,11 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterPipe } from './jobs/jobs-view/filter.pipe';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ErrorInterceptor } from './error-interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ErrorComponent } from './error/error.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,7 @@ import { MatSlideToggleModule} from '@angular/material/slide-toggle';
     FilterPipe,
     LoginComponent,
     SignupComponent,
-
+    DeleteModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,16 +48,20 @@ import { MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
+    MatIconModule,
     MatButtonModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     FormsModule,
     NgbModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent],
 })
 export class AppModule {}

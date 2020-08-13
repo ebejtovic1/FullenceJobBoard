@@ -271,8 +271,7 @@
 
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
-
-    .card-container>*:not(.circle-link),
+    .card-container > *:not(.circle-link),
     .terminal {
       width: 100%;
     }
@@ -301,17 +300,17 @@
 </style>
 
 <!-- Toolbar -->
-<div class="toolbar" role="banner">
 
-  <div height="50" width="50" class="logo-image">
-    <img height="50" width="50" src="assets/logo.jpg" />
-    <a  routerLink="/" class="Naziv">FullenceJobBoard</a>
+<div class="toolbar" role="banner">
+  <div height="50" width="70" class="logo-image">
+    <img height="50" width="70" src="../assets/logoTransparent.png" />
+    <a routerLink="/" class="Naziv">FullenceJobBoard</a>
   </div>
 
-
   <span class="spacer"></span>
-  <a *ngIf="userIsAuthenticated" routerLink="/create" style="margin-right: 10px;">Create job</a>
-  <a routerLink="/card" mat-button>About us</a>
+
+  <button *ngIf="userIsAuthenticated" mat-button routerLink="/create" routerLinkActive="mat-accent">Create job</button>
+  <button mat-button routerLink="/card"  routerLinkActive="mat-accent">About Us</button>
   <button *ngIf="!userIsAuthenticated" mat-button routerLink="/login" routerLinkActive="mat-accent">Log In</button>
   <button *ngIf="!userIsAuthenticated" mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign Up</button>
   <button *ngIf="userIsAuthenticated" (click)="onLogout()" mat-button> Log Out</button>
