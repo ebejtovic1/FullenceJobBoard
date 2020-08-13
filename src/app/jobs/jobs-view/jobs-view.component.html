@@ -3,34 +3,62 @@
   <div class="row">
     <div class="col">
       <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
           All locations
         </button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button (click)="setLocFilter(loc.location)" *ngFor="let loc of locations" mat-button ngbDropdownItem>
+          <button
+            (click)="setLocFilter(loc.location)"
+            *ngFor="let loc of locations"
+            mat-button
+            ngbDropdownItem
+          >
             {{ loc.location }}
           </button>
         </div>
       </div>
-      <button *ngIf="userIsAuthenticated" (click)="onMyJobs()" mat-button>My Jobs</button>
-      <button style="margin-left: 4px;" class="btn btn-danger" (click)="resetLocation()">
+      <button *ngIf="userIsAuthenticated" (click)="onMyJobs()" mat-button>
+        My Jobs
+      </button>
+      <button
+        style="margin-left: 4px;"
+        class="btn btn-danger"
+        (click)="resetLocation()"
+      >
         Reset
       </button>
     </div>
     <div class="row1">
       <div class="col">
         <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+          <button
+            class="btn btn-outline-primary"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
             All jobs
           </button>
           <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
             <a class="dropdown item" href="#"></a>
-            <button *ngFor="let job of jobTypes" mat-button ngbDropdownItem (click)="setJobFilter(job.jobType)">
+            <button
+              *ngFor="let job of jobTypes"
+              mat-button
+              ngbDropdownItem
+              (click)="setJobFilter(job.jobType)"
+            >
               {{ job.jobType }}
             </button>
           </div>
         </div>
-        <button style="margin-left: 4px;" class="btn btn-danger" (click)="resetJobType()">
+        <button
+          style="margin-left: 4px;"
+          class="btn btn-danger"
+          (click)="resetJobType()"
+        >
           Reset
         </button>
       </div>
@@ -38,17 +66,22 @@
     <br />
   </div>
   <div class="row justify-content-start">
-    <ng-container *ngFor="
+    <ng-container
+      *ngFor="
         let job of jobs
           | filter: filterLocation:'location':filterJobType:'jobType'
-      ">
-      <ng-container *ngIf="!userIsAuthenticated  || !myJobs || userId === job.creator">
+      "
+    >
+      <ng-container
+        *ngIf="!userIsAuthenticated || !myJobs || userId === job.creator"
+      >
         <div class="col-md-3">
           <div class="job-image">
             <img height="250" [src]="job.imagePath" />
           </div>
           <div>
-            <label class="textLabel">{{ job.title }}</label><br />
+            <label class="textLabel">{{ job.title }}</label
+            ><br />
             <label class="textLabel">{{ job.jobType }}</label>
           </div>
           <div>
@@ -57,7 +90,10 @@
             </label>
           </div>
           <div class="buttonDiv">
-            <button [routerLink]="['/showMore', job.id]" class="btn btn-primary">
+            <button
+              [routerLink]="['/showMore', job.id]"
+              class="btn btn-primary"
+            >
               Show More
             </button>
           </div>
