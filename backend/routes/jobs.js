@@ -50,8 +50,12 @@ router.post("", checkAuth, multer({ storage: storage }).single("image"), (req, r
           id: result._id
         }
       });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Creating a job failed!"
+      });
     });
-
 });
 
 router.get('', (req, res, next) => {
@@ -60,6 +64,11 @@ router.get('', (req, res, next) => {
       res.status(200).json({
         message: "Jobs fetched succesfully!",
         jobs: documents
+      });
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching jobs failed!"
       });
     });
 });
@@ -84,13 +93,18 @@ router.put("/:id", checkAuth, multer({ storage: storage }).single("image"), (req
     creator: req.userData.userId
   });
 
-  Job.updateOne({ _id: req.params.id, creator: req.userData.userId  }, post).then(result => {
+  Job.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
     if (result.nModified > 0) {
       res.status(200).json({ message: "Update successful!" });
     } else {
       res.status(401).json({ message: "Not authorized!" });
     }
-  });
+  })
+    .catch(error => {
+      res.status(500).json({
+        message: "Couldn't udpate job!"
+      });
+    });
 });
 
 router.get("/:id", (req, res, next) => {
@@ -105,7 +119,12 @@ router.get("/:id", (req, res, next) => {
         });
       }
     }
-  );
+  )
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching job failed!"
+      });
+    });
 });
 
 router.delete('/:id', checkAuth, (req, res, next) => {
@@ -113,7 +132,12 @@ router.delete('/:id', checkAuth, (req, res, next) => {
   Job.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {
     console.log(result);
     res.status(200).json({ message: 'Job deleted' });
-  });
+  })
+    .catch(error => {
+      res.status(500).json({
+        message: "Deleting posts failed!"
+      });
+    });
 });
 
 module.exports = router;
