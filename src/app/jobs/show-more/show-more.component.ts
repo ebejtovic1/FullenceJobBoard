@@ -32,6 +32,7 @@ export class ShowMoreComponent implements OnInit {
     firm: '',
     descSubstring: '',
     creator: '',
+    companyInfo: '',
   };
   private jobId: string;
   isLoading = false;
@@ -47,8 +48,6 @@ export class ShowMoreComponent implements OnInit {
       if (paramMap.has('jobId')) {
         this.jobId = paramMap.get('jobId');
         this.isLoading = true;
-        console.log(this.jobId);
-        console.log(this.jobsService.getJob(this.jobId));
         this.jobsService.getJob(this.jobId).subscribe((postData) => {
           this.isLoading = false;
 
@@ -62,6 +61,7 @@ export class ShowMoreComponent implements OnInit {
             firm: postData.firm,
             descSubstring: postData.descSubstring,
             creator: postData.creator,
+            companyInfo: postData.companyInfo,
           };
         });
       }
