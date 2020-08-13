@@ -307,7 +307,7 @@
   </div>
   <span class="groupName">FullenceJobBoard</span>
   <span class="spacer"></span>
-  <a routerLink="/create" style="margin-right: 10px;" class="btn btn-info"
+  <a  *ngIf="userIsAuthenticated" routerLink="/create" style="margin-right: 10px;" class="btn btn-info"
     >Create job</a
   >
   <a routerLink="/" class="btn btn-info">All Jobs</a>
