@@ -45,6 +45,7 @@ img {
 
 .mat-slide-toggle{
   margin-bottom: 20px!important;
+
 }
 .h5, h5{
   font-size: 15px!important;
@@ -60,10 +61,29 @@ img {
     display:block;
     float: none!important;
   }
+  .mat-slide-toggle{
+    margin-right: 50px!important;
+
+  }
 
   .mat-form-field {
     display:inline-block!important;
 
+  }
+}
+
+@media only screen and (max-width: 780px) {
+
+  .card.mb-3.ng-star-inserted {
+    max-height: 1000px!important;
+  }
+  .dugmad {
+    display:inline-grid!important;
+    float: none!important;
+  }
+
+  .card-body{
+    min-height: 350px;
   }
 }
 
@@ -109,9 +129,15 @@ img {
   box-shadow: 5px 10px 18px #888888;
   max-width: 800px!important;
 }
+
+.card-body{
+  min-width: 500px;
+
+}
 .row justify-content-start{
   display: block;
 }
+
 
 label {
   color: black;
@@ -120,6 +146,7 @@ a {
   margin-bottom: 5px;
 }
 .container {
+  border-radius: .5%;
   margin-top: 100px;
   background-color: white;
   box-shadow: 5px 10px 18px #888888;

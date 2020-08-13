@@ -1,9 +1,9 @@
 <!--Ako imamo ijedan post-->
 <div class="container">
 
-  <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-8">
-    <input class="form-control form-control-sm mr-6 w-100" type="text" placeholder="Search..." aria-label="Search">
-  </form>
+  <div class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-8">
+    <input class="form-control form-control-sm mr-6 w-100" type="text" placeholder="Search..." aria-label="Search"[(ngModel)] = "search">
+  </div>
 
   <br>
   <br>
@@ -46,7 +46,7 @@
 
     <ng-container class="klasa" *ngFor="
         let job of jobs
-          | filter: filterLocation:'location':filterJobType:'jobType'
+          | filter: filterLocation:'location':filterJobType:'jobType':search:'title'
       ">
       <ng-container *ngIf="!userIsAuthenticated  || !myJobs || userId === job.creator">
       <div class="card mb-3" style="max-width: 700px; max-height: 300px;">

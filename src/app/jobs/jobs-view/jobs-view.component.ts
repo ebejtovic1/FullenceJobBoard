@@ -24,6 +24,7 @@ export class JobsViewComponent implements OnInit, OnDestroy {
 
   public filterLocation = '';
   public filterJobType = '';
+  search = '';
 
   constructor(
     private jobsService: JobsService,
@@ -40,7 +41,7 @@ export class JobsViewComponent implements OnInit, OnDestroy {
   userId: string;
   private authStatusSub: Subscription;
   myJobs: boolean;
-  
+
 
   ngOnInit(): void {
     //kreiranje svih poslova
