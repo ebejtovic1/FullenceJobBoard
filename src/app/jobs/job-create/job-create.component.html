@@ -38,32 +38,25 @@
       >
     </mat-form-field>
 
-  <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill">
+      <mat-label>Location</mat-label>
 
-    <mat-label>Location</mat-label>
+      <mat-select formControlName="location">
+        <mat-option *ngFor="let loc of locations" [value]="loc.location">
+          {{ loc.location }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <mat-select formControlName="location">
+    <mat-form-field appearance="fill">
+      <mat-label>Job Type</mat-label>
 
-      <mat-option *ngFor="let loc of locations" [value]="loc.location">
-        {{loc.location}}
-
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-
-    <mat-label>Job Type</mat-label>
-
-    <mat-select formControlName="jobType">
-
-      <mat-option *ngFor="let jobtype of jobTypes" [value]="jobtype.jobType">
-        {{jobtype.jobType}}
-
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
+      <mat-select formControlName="jobType">
+        <mat-option *ngFor="let jobtype of jobTypes" [value]="jobtype.jobType">
+          {{ jobtype.jobType }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-form-field>
       <textarea
@@ -76,6 +69,16 @@
         >Please enter a firm</mat-error
       >
     </mat-form-field>
+
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="4"
+        formControlName="companyInfo"
+        placeholder="Company info"
+      ></textarea>
+    </mat-form-field>
+
     <button mat-raised-button color="primary" type="submit">
       Save job
     </button>

@@ -271,8 +271,7 @@
 
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
-
-    .card-container>*:not(.circle-link),
+    .card-container > *:not(.circle-link),
     .terminal {
       width: 100%;
     }
@@ -301,6 +300,7 @@
 </style>
 
 <!-- Toolbar -->
+
 <div class="toolbar" role="banner">
 
   <div height="50" width="50" class="logo-image">
@@ -315,6 +315,7 @@
   <button *ngIf="!userIsAuthenticated" mat-button routerLink="/login" routerLinkActive="mat-accent">Log In</button>
   <button *ngIf="!userIsAuthenticated" mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign Up</button>
   <button *ngIf="userIsAuthenticated" (click)="onLogout()" mat-button> Log Out</button>
+
 
 </div>
 <div>
