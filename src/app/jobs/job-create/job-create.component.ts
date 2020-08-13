@@ -24,6 +24,9 @@ export class JobCreateComponent implements OnInit {
     private jobTypeService: JobTypeService
   ) {}
 
+  public filterLocation = '';
+  public filterJobType = '';
+
   locations: Location[] = [];
   private locationsSub: Subscription;
   jobTypes: JobType[] = [];
@@ -89,6 +92,10 @@ export class JobCreateComponent implements OnInit {
     });
   }
 
+  setJobType(jobType){
+    this.job.jobType=jobType;
+    console.log(jobType);
+  }
   onSavePost() {
     if (this.form.invalid) {
       return;
@@ -108,6 +115,7 @@ export class JobCreateComponent implements OnInit {
         this.form.value.jobType,
         this.form.value.firm,
         ''
+
       );
     } else {
       this.jobsService.updateJob(
@@ -134,5 +142,14 @@ export class JobCreateComponent implements OnInit {
   }
   //podesavanje lokacije posla
 
-  setLocFilter(loc) {}
+
+  setJobFilter(job) {
+    this.filterJobType = job;
+  }
+
+
+  setLocFilter(loc) {
+    this.filterLocation = loc;
+  }
+
 }

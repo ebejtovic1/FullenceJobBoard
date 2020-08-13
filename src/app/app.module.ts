@@ -13,6 +13,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from './card/card.component';
+import { MatSelectModule } from '@angular/material/select';
 import { ShowMoreComponent } from './jobs/show-more/show-more.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -38,6 +39,7 @@ import { FilterPipe } from './jobs/jobs-view/filter.pipe';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatSelectModule,
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
