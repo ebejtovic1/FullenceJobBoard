@@ -30,6 +30,7 @@ import { FilterPipe } from './jobs/jobs-view/filter.pipe';
     FilterPipe,
     LoginComponent,
     SignupComponent,
+
   ],
   imports: [
     BrowserModule,

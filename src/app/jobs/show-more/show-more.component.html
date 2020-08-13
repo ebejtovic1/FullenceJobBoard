@@ -41,7 +41,7 @@
       </div>
     </div>
     <div>
-      <div
+      <div *ngIf="userIsAuthenticated && userId === job.creator"
         style="
           width: 60%;
           margin: auto;

@@ -38,13 +38,16 @@ export class JobsViewComponent implements OnInit, OnDestroy {
   pageSizeOptions = [1, 2, 5, 10];
   userIsAuthenticated = false;
   userId: string;
-
   private authStatusSub: Subscription;
+  myJobs: boolean;
+  
 
   ngOnInit(): void {
     //kreiranje svih poslova
     this.jobsService.getJobs();
     this.userId = this.authService.getUserId();
+    this.myJobs = false;
+    this.userIsAuthenticated = this.authService.getIsAuth();
     this.postsSub = this.jobsService
       .getPostUpdateListener()
       .subscribe((jobs: Job[]) => {
@@ -78,6 +81,7 @@ export class JobsViewComponent implements OnInit, OnDestroy {
     this.filterJobType = job;
   }
 
+
   setLocFilter(loc) {
     this.filterLocation = loc;
   }
@@ -100,8 +104,11 @@ export class JobsViewComponent implements OnInit, OnDestroy {
     this.jobsService.deleteJob(jobId);
   }
 
+  onMyJobs() {
+    this.myJobs = !this.myJobs;
+  }
+
   ngOnDestroy() {
     this.postsSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
   }
 }

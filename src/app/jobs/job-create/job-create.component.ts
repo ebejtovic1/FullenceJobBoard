@@ -78,24 +78,9 @@ export class JobCreateComponent implements OnInit {
         console.log(this.jobsService.getJob(this.jobId));
         this.jobsService.getJob(this.jobId).subscribe((postData) => {
           this.isLoading = false;
-          this.job = {
-            id: postData._id,
-            title: postData.title,
-            description: postData.description,
-            imagePath: postData.imagePath,
-            location: postData.location,
-            jobType: postData.jobType,
-            firm: postData.firm,
-            descSubstring: postData.descSubstring,
-          };
-          this.form.setValue({
-            title: this.job.title,
-            description: this.job.description,
-            image: this.job.imagePath,
-            location: this.job.location,
-            jobType: this.job.jobType,
-            firm: this.job.firm,
-          });
+          this.job = { id: postData._id, title: postData.title, description: postData.description, imagePath: postData.imagePath, location: postData.location, jobType: postData.jobType, firm: postData.firm, descSubstring: postData.descSubstring, creator: postData.creator };
+          this.form.setValue({ title: this.job.title, description: this.job.description, image: this.job.imagePath, location: this.job.location , jobType: this.job.jobType, firm: this.job.firm});
+
         });
       } else {
         this.mode = 'create';

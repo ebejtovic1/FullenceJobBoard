@@ -8,7 +8,6 @@ import { LoginComponent } from "./auth/login/login.component";
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGuard } from "./auth/auth.guard";
 
-
 const routes: Routes = [
   {
     path: 'card',
@@ -18,7 +17,7 @@ const routes: Routes = [
   {
     path: 'create',
     component: JobCreateComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
   path: 'showMore/:jobId',
@@ -26,7 +25,7 @@ const routes: Routes = [
   }
  ,{
     path: 'edit/:postId', component: JobCreateComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
   {
     path: "login", component: LoginComponent
@@ -41,4 +40,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
