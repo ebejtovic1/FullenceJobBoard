@@ -118,7 +118,7 @@ router.put(
         res.status(200).json({ message: "Update successful!" });
       } else {
         res.status(402).json({
-          message: "No updates were made!"
+          message: "No changes have been made!"
         });
       }
     })
