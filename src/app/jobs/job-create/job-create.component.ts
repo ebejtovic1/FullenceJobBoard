@@ -44,7 +44,14 @@ export class JobCreateComponent implements OnInit, OnDestroy {
   form: FormGroup;
   job: Job;
 
+  userIsAuthenticated = false;
+  userId: string;
+
   ngOnInit(): void {
+
+    this.userId = this.authService.getUserId();
+    this.userIsAuthenticated = this.authService.getIsAuth();
+
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe(authStatus => {

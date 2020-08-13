@@ -97,12 +97,14 @@ router.put("/:id", checkAuth, multer({ storage: storage }).single("image"), (req
     if (result.nModified > 0) {
       res.status(200).json({ message: "Update successful!" });
     } else {
-      res.status(401).json({ message: "Not authorized!" });
+      res.status(402).json({
+        message: "No updates were made!"
+      });
     }
   })
     .catch(error => {
       res.status(500).json({
-        message: "Couldn't udpate job!"
+        message: "Couldn't update job!"
       });
     });
 });
