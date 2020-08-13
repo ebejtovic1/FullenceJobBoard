@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { JobType } from 'src/app/jobs/job-Type/jobType.model';
 import { JobTypeService } from 'src/app/jobs/job-Type/jobType.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-create',
@@ -23,7 +24,8 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     public route: ActivatedRoute,
     private locationService: LocationService,
     private jobTypeService: JobTypeService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   public filterLocation = '';
@@ -48,7 +50,6 @@ export class JobCreateComponent implements OnInit, OnDestroy {
   userId: string;
 
   ngOnInit(): void {
-
     this.userId = this.authService.getUserId();
     this.userIsAuthenticated = this.authService.getIsAuth();
 
@@ -146,7 +147,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.form.value.location,
         this.form.value.jobType,
         this.form.value.firm,
-        "",
+        '',
         this.form.value.companyInfo
       );
     } else {
@@ -182,8 +183,11 @@ export class JobCreateComponent implements OnInit, OnDestroy {
   setLocFilter(loc) {
     this.filterLocation = loc;
   }
-
   ngOnDestroy(): void {
     this.authStatusSub.unsubscribe();
+  }
+  close() {
+    if (this.mode === 'edit') this.router.navigate(['showMore/', this.jobId]);
+    else this.router.navigate(['']);
   }
 }
