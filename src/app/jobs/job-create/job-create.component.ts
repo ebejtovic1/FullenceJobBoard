@@ -89,7 +89,6 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.jobId = paramMap.get('postId');
         this.isLoading = true;
 
-        console.log(this.jobsService.getJob(this.jobId));
         this.jobsService.getJob(this.jobId).subscribe((postData) => {
           this.isLoading = false;
           this.job = {
@@ -140,7 +139,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.form.value.location,
         this.form.value.jobType,
         this.form.value.firm,
-        '',
+        "",
         this.form.value.companyInfo
       );
     } else {

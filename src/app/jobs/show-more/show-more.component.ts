@@ -48,8 +48,6 @@ export class ShowMoreComponent implements OnInit {
       if (paramMap.has('jobId')) {
         this.jobId = paramMap.get('jobId');
         this.isLoading = true;
-        console.log(this.jobId);
-        console.log(this.jobsService.getJob(this.jobId));
         this.jobsService.getJob(this.jobId).subscribe((postData) => {
           this.isLoading = false;
 

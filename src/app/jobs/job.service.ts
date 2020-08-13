@@ -62,6 +62,7 @@ export class JobsService {
     jobData.append('location', location);
     jobData.append('jobType', jobType);
     jobData.append('firm', firm);
+    jobData.append('companyInfo', companyInfo);
     this.http
       .post<{ message: string; post: Job }>(
         'http://localhost:3000/api/jobs',
@@ -78,7 +79,7 @@ export class JobsService {
           firm: firm,
           descSubstring: '',
           creator: responseData.post.creator,
-          companyInfo: 'asdasdds',
+          companyInfo: responseData.post.jobType,
         };
         this.jobs.push(post);
         this.jobsUpdated.next([...this.jobs]);

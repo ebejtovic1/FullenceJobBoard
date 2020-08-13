@@ -32,7 +32,6 @@ router.post(
   checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
-    console.log("-----------" + req.body.companyInfo);
     const url = req.protocol + "://" + req.get("host");
     const post = new Job({
       //ovo je post iz baze

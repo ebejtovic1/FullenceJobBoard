@@ -36,7 +36,7 @@ const jobSchema = mongoose.Schema({
   },
   companyInfo: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 
