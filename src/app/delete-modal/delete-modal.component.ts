@@ -5,10 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './delete-modal.component.html',
   styleUrls: ['./delete-modal.component.css'],
 })
-export class DeleteModalComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+export class DeleteModalComponent implements OnInit {
+  constructor() { }
+
+  ngOnInit(): void { }
   public onYes() {
     console.log('yes');
   }

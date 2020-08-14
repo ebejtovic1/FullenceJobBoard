@@ -4,15 +4,15 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from 'src/app/location/location.model';
+
 @Injectable({ providedIn: 'root' })
 export class LocationService {
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
   private locations: Location[] = [];
-  //da bi mogli slati kopiju azuriranu (mozemo samo staviti this.posts)
   private locUpdated = new Subject<Location[]>();
 
   getLocations() {

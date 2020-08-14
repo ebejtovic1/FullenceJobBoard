@@ -1,25 +1,27 @@
 .container {
   background-color: black;
 }
+
 .card {
-  margin: auto;
+  margin    : auto;
   margin-top: 100px;
-  max-width: 70%;
+  max-width : 70%;
   box-shadow: 5px 10px 18px #888888;
 }
 
-.card-elma{
+.card-elma {
 
-  align-items: center;
-  text-align: center;
-  margin-top: 8px;
+  align-items  : center;
+  text-align   : center;
+  margin-top   : 8px;
   margin-bottom: 8px;
 
 }
+
 .card-header {
-  text-align: center;
+  text-align : center;
   font-family: "Georgia", serif;
-  font-size: 20pt;
+  font-size  : 20pt;
   font-weight: bold;
   align-items: center;
 }
@@ -34,63 +36,66 @@
 
 }
 
-.h5, h5{
-  font-size: 18px!important;
+.h5,
+h5 {
+  font-size: 18px !important;
 }
+
 .btn-primary {
   -webkit-appearance: none;
-  width: auto;
-  min-width: 100px;
-  border-radius: 24px;
-  margin: auto;
-  text-align: center;
-  padding: 15px 40px;
-  margin-top: 5px;
-  background-color: #1256b0;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
-  border: none;
-  transition: all 0.3s ease;
-  outline: 0;
+  width             : auto;
+  min-width         : 100px;
+  border-radius     : 24px;
+  margin            : auto;
+  text-align        : center;
+  padding           : 15px 40px;
+  margin-top        : 5px;
+  background-color  : #1256b0;
+  color             : #fff;
+  font-size         : 14px;
+  font-weight       : 500;
+  box-shadow        : 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+  border            : none;
+  transition        : all 0.3s ease;
+  outline           : 0;
 }
+
 .btn-info {
   -webkit-appearance: none;
-  width: auto;
-  margin-left: 10px;
-  min-width: 100px;
-  border-radius: 24px;
-  text-align: center;
-  padding: 15px 40px;
-  margin-top: 5px;
-  background-color: #ff4081;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
-  border: none;
-  transition: all 0.3s ease;
-  outline: 0;
+  width             : auto;
+  margin-left       : 10px;
+  min-width         : 100px;
+  border-radius     : 24px;
+  text-align        : center;
+  padding           : 15px 40px;
+  margin-top        : 5px;
+  background-color  : #ff4081;
+  color             : #fff;
+  font-size         : 14px;
+  font-weight       : 500;
+  box-shadow        : 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+  border            : none;
+  transition        : all 0.3s ease;
+  outline           : 0;
 }
 
 .textLabel {
-  margin-top: 5px;
-  color: black;
-  word-break: break-all;
+  margin-top : 5px;
+  color      : black;
+  word-break : break-all;
   font-family: "Georgia", serif;
   font-weight: bold;
 }
 
 #overlay {
-  position: fixed;
-  display: block;
-  height: 100%;
-  top: 2;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position        : fixed;
+  display         : block;
+  height          : 100%;
+  top             : 2;
+  left            : 0;
+  right           : 0;
+  bottom          : 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-  cursor: pointer;
+  z-index         : 2;
+  cursor          : pointer;
 }

@@ -1,4 +1,3 @@
-//servis je typescript klasa koja omogućava komuniciranje između komponenti bez propertija i bindinga
 import { Job } from './job.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -8,15 +7,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class JobsService {
+
   private jobs: Job[] = [];
-  //da bi mogli slati kopiju azuriranu (mozemo samo staviti this.posts)
   private jobsUpdated = new Subject<Job[]>();
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   getJobs() {
     this.http
@@ -86,6 +85,7 @@ export class JobsService {
         this.router.navigate(['/']);
       });
   }
+
   deleteJob(jobId: string) {
     this.http
       .delete('http://localhost:3000/api/jobs/' + jobId)

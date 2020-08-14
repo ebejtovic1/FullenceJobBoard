@@ -6,14 +6,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { JobType } from './jobType.model';
 
 @Injectable({ providedIn: 'root' })
+
 export class JobTypeService {
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
+
   private jobTypes: JobType[] = [];
-  //da bi mogli slati kopiju azuriranu (mozemo samo staviti this.posts)
   private jobsUpdated = new Subject<JobType[]>();
 
   getJobTypes() {

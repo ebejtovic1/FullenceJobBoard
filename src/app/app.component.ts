@@ -9,21 +9,21 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-  title = 'fullenceJobBoard';
 
+export class AppComponent implements OnInit, OnDestroy {
+
+  title = 'fullenceJobBoard';
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
 
-  constructor(private authService: AuthService, private http: HttpClient, private router: Router) {}
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router) { }
   ngOnDestroy(): void {
     this.authListenerSubs.unsubscribe();
-    
   }
 
   onLogout() {
     this.authService.logout();
-    this.router.navigate(["/login"]); 
+    this.router.navigate(["/login"]);
   }
 
   ngOnInit() {

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
     selector: 'app-error',
     styleUrls: ['./error.component.css']
 })
+
 export class ErrorComponent {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: { message: string },

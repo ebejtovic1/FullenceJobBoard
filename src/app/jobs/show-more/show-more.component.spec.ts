@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ShowMoreComponent } from './show-more.component';
 
 describe('ShowMoreComponent', () => {
@@ -8,9 +7,9 @@ describe('ShowMoreComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowMoreComponent ]
+      declarations: [ShowMoreComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

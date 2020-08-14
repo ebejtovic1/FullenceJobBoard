@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Job } from '../job.model';
-import { NgForOf } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { JobsService } from '../job.service';
-import { ActivatedRoute, ParamMap } from '@angular/router'; //da znamo da li idemo edit ili create posta, da li je id proslijeđen ili ne
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { mimeType } from './mime-type.validator';
 import { LocationService } from 'src/app/location/location.service';
 import { Location } from 'src/app/location/location.model';
@@ -18,6 +17,7 @@ import { Router } from '@angular/router';
   templateUrl: './job-create.component.html',
   styleUrls: ['./job-create.component.css'],
 })
+
 export class JobCreateComponent implements OnInit, OnDestroy {
   constructor(
     public jobsService: JobsService,
@@ -26,17 +26,15 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     private jobTypeService: JobTypeService,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   public filterLocation = '';
   public filterJobType = '';
-
   locations: Location[] = [];
   private locationsSub: Subscription;
   jobTypes: JobType[] = [];
   private jobTypSub: Subscription;
   private authStatusSub: Subscription;
-
   private mode = 'create';
   private jobId: string;
   imagePreview: string;
@@ -45,7 +43,6 @@ export class JobCreateComponent implements OnInit, OnDestroy {
   enteredTitle = '';
   form: FormGroup;
   job: Job;
-
   userIsAuthenticated = false;
   userId: string;
 
@@ -74,7 +71,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
       companyInfo: new FormControl(null, { validators: [Validators.required] }),
     });
 
-    //kreiranje svih lokacija
+    //locations
     this.locationService.getLocations();
     this.locationsSub = this.locationService
       .getLocationsUpdatedListener()
@@ -82,14 +79,14 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.locations = locs;
       });
 
-    //kreiranje svih poslova
-
+    //job types
     this.jobTypeService.getJobTypes();
     this.jobTypSub = this.jobTypeService
       .getJobUpdateListener()
       .subscribe((jobTypes: JobType[]) => {
         this.jobTypes = jobTypes;
       });
+
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('postId')) {
@@ -98,7 +95,9 @@ export class JobCreateComponent implements OnInit, OnDestroy {
         this.isLoading = true;
 
         this.jobsService.getJob(this.jobId).subscribe((postData) => {
+
           this.isLoading = false;
+
           this.job = {
             id: postData._id,
             title: postData.title,
@@ -111,6 +110,7 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             creator: postData.creator,
             companyInfo: postData.companyInfo,
           };
+
           this.form.setValue({
             title: this.job.title,
             description: this.job.description,
@@ -121,7 +121,8 @@ export class JobCreateComponent implements OnInit, OnDestroy {
             companyInfo: this.job.companyInfo,
           });
         });
-      } else {
+      }
+      else {
         this.mode = 'create';
         this.jobId = null;
       }
@@ -132,13 +133,16 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     this.job.jobType = jobType;
     console.log(jobType);
   }
+
   onSavePost() {
     console.log(this.form.value.companyInfo);
+
     if (this.form.invalid) {
       return;
     }
 
     this.isLoading = true;
+
     if (this.mode === 'create') {
       this.jobsService.addJob(
         this.form.value.title,
@@ -164,7 +168,9 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     }
     this.form.reset();
   }
+
   onImagePicked(event: Event) {
+
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({ image: file });
     this.form.get('image').updateValueAndValidity();
@@ -174,7 +180,6 @@ export class JobCreateComponent implements OnInit, OnDestroy {
     };
     reader.readAsDataURL(file);
   }
-  //podesavanje lokacije posla
 
   setJobFilter(job) {
     this.filterJobType = job;
@@ -183,9 +188,11 @@ export class JobCreateComponent implements OnInit, OnDestroy {
   setLocFilter(loc) {
     this.filterLocation = loc;
   }
+
   ngOnDestroy(): void {
     this.authStatusSub.unsubscribe();
   }
+
   close() {
     if (this.mode === 'edit') this.router.navigate(['showMore/', this.jobId]);
     else this.router.navigate(['']);

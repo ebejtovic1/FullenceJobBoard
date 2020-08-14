@@ -20,10 +20,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-  path: 'showMore/:jobId',
+    path: 'showMore/:jobId',
     component: ShowMoreComponent,
   }
- ,{
+  , {
     path: 'edit/:postId', component: JobCreateComponent,
     canActivate: [AuthGuard]
   },
@@ -40,4 +40,5 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard]
 })
+
 export class AppRoutingModule { }

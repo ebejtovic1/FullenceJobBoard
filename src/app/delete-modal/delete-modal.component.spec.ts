@@ -8,9 +8,9 @@ describe('DeleteModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteModalComponent ]
+      declarations: [DeleteModalComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
