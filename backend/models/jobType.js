@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const jobTypeSchema = mongoose.Schema({
   job_type: {
     type: String,

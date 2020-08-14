@@ -14,7 +14,7 @@ const MIME_TYPE_MAP = {
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MIME_TYPE_MAP[file.mimetype];
-    let error = new Error("Invalid mime type");
+    let error = new Error("Invalid mime type");       // only images of specified format may be uploaded
     if (isValid) {
       error = null;
     }
@@ -24,26 +24,25 @@ const storage = multer.diskStorage({
     const name = file.originalname.toLowerCase().split(" ").join("-");
     const ext = MIME_TYPE_MAP[file.mimetype];
     cb(null, name + "-" + Date.now() + "." + ext);
-  },
+  }
 });
 
+// create new job advert advert
 router.post(
   "",
   checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
-
     let imagePath = req.body.imagePath;
 
     if (req.file) {
       const url = req.protocol + '://' + req.get("host");
       imagePath = url + "/images/" + req.file.filename
-
     }
 
     const url = req.protocol + "://" + req.get("host");
+
     const post = new Job({
-      //ovo je post iz baze
       title: req.body.title,
       description: req.body.description,
       imagePath: imagePath,
@@ -54,11 +53,10 @@ router.post(
       companyInfo: req.body.companyInfo,
     });
 
-    post
-      .save()
-      .then((result) => { 
+    post.save()
+      .then((result) => {
         res.status(201).json({
-          message: "Job added succesfully!",
+          message: "Job advert added succesfully!",
           post: {
             ...result,
             id: result._id,
@@ -67,27 +65,29 @@ router.post(
       })
       .catch((error) => {
         res.status(500).json({
-          message: "Creating a job failed!",
+          message: "Creating a job advert failed!",
         });
       });
   }
 );
 
+// get all job adverts 
 router.get("", (req, res, next) => {
   Job.find()
     .then((documents) => {
       res.status(200).json({
-        message: "Jobs fetched succesfully!",
+        message: "Job adverts fetched succesfully!",
         jobs: documents,
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: "Fetching jobs failed!",
+        message: "Fetching job adverts failed!",
       });
     });
 });
 
+// update existing job advert
 router.put(
   "/:id",
   checkAuth,
@@ -95,12 +95,12 @@ router.put(
   (req, res, next) => {
     let imagePath = req.body.imagePath;
 
-
+    // image path definition
     if (req.file) {
       const url = req.protocol + '://' + req.get("host");
       imagePath = url + "/images/" + req.file.filename
-
     }
+
     const post = new Job({
       _id: req.body.id,
       title: req.body.title,
@@ -124,7 +124,7 @@ router.put(
     })
       .catch(error => {
         res.status(500).json({
-          message: "Couldn't update job!"
+          message: "Cannot update job advert!"
         });
       });
 
@@ -133,17 +133,18 @@ router.put(
         if (result.nModified > 0) {
           res.status(200).json({ message: "Update successful!" });
         } else {
-          res.status(401).json({ message: "Not authorized!" });
+          res.status(401).json({ message: "You are not authorized for this action!" });
         }
       })
       .catch((error) => {
         res.status(500).json({
-          message: "Couldn't udpate job!",
+          message: "Cannot update job advert!",
         });
       });
   }
 );
 
+// get job advert by respective id
 router.get("/:id", (req, res, next) => {
   Job.findById(req.params.id)
     .then((post) => {
@@ -151,27 +152,28 @@ router.get("/:id", (req, res, next) => {
         res.status(200).json(post);
       } else {
         res.status(404).json({
-          message: "Job not found!",
+          message: "Job advert not found!",
         });
       }
     })
     .catch((error) => {
       res.status(500).json({
-        message: "Fetching job failed!",
+        message: "Fetching job adverts failed!",
       });
     });
 });
 
+// deletion of job advert
 router.delete("/:id", checkAuth, (req, res, next) => {
   console.log(req.params.id);
   Job.deleteOne({ _id: req.params.id, creator: req.userData.userId })
     .then((result) => {
       console.log(result);
-      res.status(200).json({ message: "Job deleted" });
+      res.status(200).json({ message: "Job advert deleted!" });
     })
     .catch((error) => {
       res.status(500).json({
-        message: "Deleting posts failed!",
+        message: "Deleting job advert failed!",
       });
     });
 });

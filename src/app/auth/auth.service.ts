@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
-
 import { AuthData } from "./auth-data.model";
 
 @Injectable({ providedIn: "root" })
@@ -36,7 +35,7 @@ export class AuthService {
         this.http
             .post("http://localhost:3000/api/user/signup", authData)
             .subscribe(() => {
-                this.router.navigate(["/"]);
+                this.router.navigate(["/login"]);
             }, error => {
                 this.authStatusListener.next(false);
             });
@@ -50,9 +49,11 @@ export class AuthService {
                 authData
             )
             .subscribe(response => {
+
                 const token = response.token;
                 this.token = token;
-                if (token) {
+
+                if (token) {                    //token exists
                     const expiresInDuration = response.expiresIn;
                     this.setAuthTimer(expiresInDuration);
                     this.isAuthenticated = true;
@@ -65,12 +66,13 @@ export class AuthService {
                     this.router.navigate(["/"]);
                 }
             },
-                 error => {
+                error => {
                     this.authStatusListener.next(false);
                 });
     }
 
     autoAuthUser() {
+
         const authInformation = this.getAuthData();
         if (!authInformation) {
             return;

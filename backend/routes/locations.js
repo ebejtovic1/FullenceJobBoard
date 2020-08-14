@@ -3,9 +3,10 @@ const router = express.Router();
 const multer = require('multer');
 const Location = require('../models/location');
 
-router.post("/",(req, res, next) => {
-  const loc = new Location({                         //ovo je post iz baze
-    location : req.body.location
+// create new location
+router.post("/", (req, res, next) => {
+  const loc = new Location({
+    location: req.body.location
   });
 
   loc.save()
@@ -18,18 +19,17 @@ router.post("/",(req, res, next) => {
         }
       });
     });
-
 });
 
+// get all locations
 router.get('/', (req, res, next) => {
   Location.find()
     .then(documents => {
       res.status(200).json({
-        message: "Jobs location fetched succesfully!",
+        message: "Job locations fetched succesfully!",
         location: documents
       });
     });
 });
-
 
 module.exports = router;

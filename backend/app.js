@@ -7,9 +7,7 @@ const postsRoutes = require("./routes/jobs");
 const locations = require("./routes/locations");
 const jobType = require("./routes/jobTypes");
 const mongoose = require("mongoose");
-
 const userRoutes = require("./routes/user");
-
 const { readBufferWithDetectedEncoding } = require("tslint/lib/utils");
 
 mongoose
@@ -26,7 +24,7 @@ mongoose
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use("/images", express.static(path.join("backend/images"))); //da moze pristupati images folderu backend
+app.use("/images", express.static(path.join("backend/images"))); 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(

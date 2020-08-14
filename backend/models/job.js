@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const jobSchema = mongoose.Schema({
   title: {
     type: String,
@@ -17,7 +18,6 @@ const jobSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-
   jobType: {
     type: String,
     required: true,

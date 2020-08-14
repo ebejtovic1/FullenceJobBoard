@@ -3,8 +3,10 @@ const router = express.Router();
 const multer = require('multer');
 const JobType = require('../models/jobType');
 
-router.post("/",(req, res, next) => {
-  const type = new JobType({                         //ovo je post iz baze
+// create new job type
+router.post("/", (req, res, next) => {
+
+  const type = new JobType({
     job_type: req.body.job_type
   });
 
@@ -18,18 +20,17 @@ router.post("/",(req, res, next) => {
         }
       });
     });
-
 });
 
+// get all job types
 router.get('/', (req, res, next) => {
   JobType.find()
     .then(documents => {
       res.status(200).json({
-        message: "Jobs fetched succesfully!",
+        message: "Job types fetched succesfully!",
         job_type: documents
       });
     });
 });
-
 
 module.exports = router;

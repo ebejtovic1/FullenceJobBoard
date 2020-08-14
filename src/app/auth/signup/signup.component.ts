@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Subscription } from "rxjs";
-
-
 import { AuthService } from "../auth.service";
 
 @Component({
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.scss"]
 })
+
 export class SignupComponent implements OnInit, OnDestroy {
   isLoading = false;
   private authStatusSub: Subscription;
@@ -21,6 +20,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   ngOnDestroy(): void {
     this.authStatusSub.unsubscribe();
   }
