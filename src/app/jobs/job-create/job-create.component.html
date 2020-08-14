@@ -5,7 +5,7 @@
       <input matInput type="text" formControlName="title" placeholder="Job Title" />
       <mat-error *ngIf="form.get('title').invalid">Please enter a job title</mat-error>
     </mat-form-field>
-    <div style="margin-top: 15px; text-align: center;">
+    <div style=" max-width: 350px; margin:auto; text-align:center;">
       <button mat-stroked-button type="button" (click)="filePicker.click()">
         Pick Image
       </button>
